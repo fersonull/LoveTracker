@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, Dimensions } from 'react-native';
-import { Heart } from 'lucide-react-native';
+import { Heart, MousePointerClick } from 'lucide-react-native';
 import { DateUtils } from '../utils/dateCalculations';
 import { useTheme } from '../context/ThemeContext';
 
@@ -13,7 +13,7 @@ export default function HeroCountdown({ startDate, partnerNames }) {
     minutes: 0,
     seconds: 0
   });
-  
+
   const [backgroundTransition] = useState(new Animated.Value(0));
   const [pulseAnim] = useState(new Animated.Value(1));
   const { colors } = useTheme();
@@ -21,29 +21,29 @@ export default function HeroCountdown({ startDate, partnerNames }) {
   useEffect(() => {
     const updateCountdown = () => {
       if (!startDate) return;
-      
+
       const start = new Date(startDate);
       const now = new Date();
-      
+
       // Calculate the total time difference in milliseconds
       const totalDiff = now.getTime() - start.getTime();
-      
+
       // Calculate total days since start
       const totalDays = Math.floor(totalDiff / (1000 * 60 * 60 * 24));
-      
+
       // Calculate total hours since relationship started
       const totalHours = Math.floor(totalDiff / (1000 * 60 * 60));
-      
+
       // For minutes and seconds, use current real-time values
       // These will reset every hour and count up from 0-59
       const currentMinutes = now.getMinutes();
       const currentSeconds = now.getSeconds();
-      
-      setCountdown({ 
-        days: totalDays, 
+
+      setCountdown({
+        days: totalDays,
         hours: totalHours,
-        minutes: currentMinutes, 
-        seconds: currentSeconds 
+        minutes: currentMinutes,
+        seconds: currentSeconds
       });
     };
 
@@ -68,7 +68,7 @@ export default function HeroCountdown({ startDate, partnerNames }) {
         }),
       ])
     );
-    
+
     // Subtle pulse animation for the circle
     const pulseAnimation = Animated.loop(
       Animated.sequence([
@@ -84,10 +84,10 @@ export default function HeroCountdown({ startDate, partnerNames }) {
         }),
       ])
     );
-    
+
     bgAnimation.start();
     pulseAnimation.start();
-    
+
     return () => {
       bgAnimation.stop();
       pulseAnimation.stop();
@@ -105,19 +105,19 @@ export default function HeroCountdown({ startDate, partnerNames }) {
         {/* Circular Countdown */}
         <View className="relative">
           {/* Outer dotted border with more space */}
-          <View 
+          <View
             className="border-2 border-dashed rounded-full"
-            style={{ 
-              width: 300, 
+            style={{
+              width: 300,
               height: 300,
               borderColor: colors.border
             }}
           />
-          
+
           {/* Main Circle with breathing room */}
-          <Animated.View 
+          <Animated.View
             className="absolute rounded-full items-center justify-center"
-            style={{ 
+            style={{
               top: 20,
               left: 20,
               right: 20,
@@ -133,38 +133,38 @@ export default function HeroCountdown({ startDate, partnerNames }) {
           >
             {/* Love Icon */}
             <View className="absolute" style={{ top: 30 }}>
-              <Heart size={20} color="white" fill="white" />
+              <MousePointerClick size={20} color="white" fill="white" />
             </View>
-            
+
             {/* Main Counter with more space */}
             <View className="items-center">
-              <Text 
+              <Text
                 className="font-bold text-white mb-2"
-                style={{ 
-                  fontSize: 52, 
+                style={{
+                  fontSize: 52,
                   fontFamily: 'InstrumentSans_SemiCondensed-Bold',
                   lineHeight: 56
                 }}
               >
                 {countdown.days}
               </Text>
-              <Text 
+              <Text
                 className="text-white mb-6"
-                style={{ 
-                  fontSize: 16, 
+                style={{
+                  fontSize: 16,
                   fontFamily: 'InstrumentSans-Medium',
                   opacity: 0.9
                 }}
               >
                 days together
               </Text>
-              
+
               {/* Time Details with more breathing room */}
               <View className="bg-white/20 rounded-2xl px-6 py-3">
-                <Text 
+                <Text
                   className="text-white text-center"
-                  style={{ 
-                    fontSize: 15, 
+                  style={{
+                    fontSize: 15,
                     fontFamily: 'InstrumentSans-Regular',
                     opacity: 0.9
                   }}
@@ -173,37 +173,24 @@ export default function HeroCountdown({ startDate, partnerNames }) {
                 </Text>
               </View>
             </View>
-            
-            {/* Bottom message with more space */}
-            <View className="absolute" style={{ bottom: 30 }}>
-              <Text 
-                className="text-white text-center"
-                style={{ 
-                  fontSize: 12, 
-                  fontFamily: 'InstrumentSans-Regular',
-                  opacity: 0.8
-                }}
-              >
-                Every moment counts
-              </Text>
-            </View>
+
           </Animated.View>
         </View>
-        
+
         {/* Names below circle with more space */}
         <View className="mt-8 items-center">
-          <Text 
-            style={{ 
-              fontSize: 24, 
+          <Text
+            style={{
+              fontSize: 24,
               fontFamily: 'InstrumentSans_SemiCondensed-Regular',
               color: colors.text.primary
             }}
           >
             {partnerNames ? `${partnerNames.partner1} & ${partnerNames.partner2}` : 'Your Love Story'}
           </Text>
-          <Text 
-            style={{ 
-              fontSize: 16, 
+          <Text
+            style={{
+              fontSize: 16,
               fontFamily: 'InstrumentSans-Regular',
               color: colors.text.secondary,
               marginTop: 6
