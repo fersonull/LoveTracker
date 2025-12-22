@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Heart, Settings, Calendar, User } from 'lucide-react-native';
+import { Heart, Settings, Calendar } from 'lucide-react-native';
 import { useTheme } from '../context/ThemeContext';
 
 // Import screens
@@ -31,8 +31,6 @@ function MainTabs() {
                         IconComponent = Heart;
                     } else if (route.name === 'Calendar') {
                         IconComponent = Calendar;
-                    } else if (route.name === 'Profile') {
-                        IconComponent = User;
                     } else if (route.name === 'Settings') {
                         IconComponent = Settings;
                     }
@@ -72,11 +70,6 @@ function MainTabs() {
                 name="Calendar" 
                 component={DashboardScreen} // Placeholder for now
                 options={{ tabBarLabel: 'Memories' }}
-            />
-            <Tab.Screen 
-                name="Profile" 
-                component={DashboardScreen} // Placeholder for now
-                options={{ tabBarLabel: 'Profile' }}
             />
             <Tab.Screen 
                 name="Settings" 

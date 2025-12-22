@@ -243,34 +243,59 @@ export default function DashboardScreen({ navigation, route }) {
             />
           </View>
 
-          {/* Single full-width card */}
+          {/* Minimal Summary Card */}
           <View 
-            className="rounded-3xl p-6 shadow-sm"
+            className="rounded-2xl p-5 border"
             style={{
-              backgroundColor: colors.accent.rose
+              backgroundColor: colors.surface,
+              borderColor: colors.border
             }}
           >
-            <View className="items-center">
-              <Heart size={32} color="white" fill="white" />
-              <Text 
-                className="text-white mt-3 mb-2"
-                style={{ 
-                  fontSize: 24, 
-                  fontFamily: 'InstrumentSans_SemiCondensed-Bold'
-                }}
-              >
-                {DateUtils.formatDuration(duration)}
-              </Text>
-              <Text 
-                className="text-white text-center"
-                style={{ 
-                  fontSize: 16, 
-                  fontFamily: 'InstrumentSans-Regular',
-                  opacity: 0.9
-                }}
-              >
-                Your beautiful love story continues
-              </Text>
+            <View className="flex-row items-center justify-between">
+              <View className="flex-1">
+                <Text 
+                  style={{ 
+                    fontSize: 18, 
+                    fontFamily: 'InstrumentSans-SemiBold',
+                    color: colors.text.primary
+                  }}
+                >
+                  Together for {DateUtils.formatDuration(duration)}
+                </Text>
+                <Text 
+                  style={{ 
+                    fontSize: 14, 
+                    fontFamily: 'InstrumentSans-Regular',
+                    color: colors.text.secondary,
+                    marginTop: 4
+                  }}
+                >
+                  Since {new Date(relationshipData.startDate).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric', 
+                    year: 'numeric'
+                  })}
+                </Text>
+              </View>
+              
+              <View className="items-end">
+                <View 
+                  className="rounded-full p-3"
+                  style={{ backgroundColor: colors.accent.rose }}
+                >
+                  <Heart size={20} color="white" fill="white" />
+                </View>
+                <Text 
+                  style={{ 
+                    fontSize: 12, 
+                    fontFamily: 'InstrumentSans-Medium',
+                    color: colors.accent.rose,
+                    marginTop: 8
+                  }}
+                >
+                  {duration.totalDays} days
+                </Text>
+              </View>
             </View>
           </View>
         </View>
