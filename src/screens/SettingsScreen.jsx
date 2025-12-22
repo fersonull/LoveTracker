@@ -67,13 +67,14 @@ export default function SettingsScreen({ navigation }) {
 
   const SettingItem = ({ title, subtitle, onPress, rightElement, danger = false }) => (
     <TouchableOpacity
-      className="rounded-xl p-4 mb-3 active:scale-95"
+      className="rounded-xl p-4 mb-3"
       style={{
         backgroundColor: colors.cardBackground,
         borderWidth: 1,
         borderColor: danger ? '#FCA5A5' : colors.border,
       }}
       onPress={onPress}
+      activeOpacity={0.8}
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
@@ -140,6 +141,7 @@ export default function SettingsScreen({ navigation }) {
                 borderColor: colors.border,
               }}
               onPress={() => navigation.goBack()}
+              activeOpacity={0.8}
             >
               <ArrowLeft size={24} color={colors.accent.rose} />
             </TouchableOpacity>

@@ -110,7 +110,7 @@ export default function PartnerNamesScreen({ navigation }) {
 
           {/* Continue Button */}
           <TouchableOpacity
-            className="py-4 rounded-2xl shadow-sm active:scale-95"
+            className="py-4 rounded-2xl shadow-sm"
             style={{
               backgroundColor: partner1Name.trim() && partner2Name.trim() 
                 ? colors.accent.rose 
@@ -118,6 +118,7 @@ export default function PartnerNamesScreen({ navigation }) {
             }}
             onPress={handleContinue}
             disabled={!partner1Name.trim() || !partner2Name.trim()}
+            activeOpacity={0.8}
           >
             <Text 
               style={{

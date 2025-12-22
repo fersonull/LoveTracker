@@ -93,12 +93,13 @@ export default function StartDateScreen({ navigation, route }) {
 
         {/* Date Picker Button */}
         <TouchableOpacity
-          className="py-4 rounded-2xl mb-12 border active:scale-95"
+          className="py-4 rounded-2xl mb-12 border"
           style={{
             backgroundColor: colors.surface,
             borderColor: colors.border
           }}
           onPress={() => setShowDatePicker(true)}
+          activeOpacity={0.8}
         >
           <Text 
             style={{
@@ -114,9 +115,10 @@ export default function StartDateScreen({ navigation, route }) {
 
         {/* Continue Button */}
         <TouchableOpacity
-          className="py-4 rounded-2xl shadow-sm active:scale-95"
+          className="py-4 rounded-2xl shadow-sm"
           style={{ backgroundColor: colors.accent.rose }}
           onPress={handleContinue}
+          activeOpacity={0.8}
         >
           <Text 
             style={{

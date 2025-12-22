@@ -42,9 +42,10 @@ export default function WelcomeScreen({ navigation }) {
 
         {/* CTA Button */}
         <TouchableOpacity 
-          className="px-12 py-4 rounded-2xl shadow-sm active:scale-95"
+          className="px-12 py-4 rounded-2xl shadow-sm"
           style={{ backgroundColor: colors.accent.rose }}
           onPress={() => navigation.navigate('PartnerNames')}
+          activeOpacity={0.8}
         >
           <Text 
             style={{

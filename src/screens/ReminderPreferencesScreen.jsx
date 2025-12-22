@@ -37,12 +37,13 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
 
   const ToggleOption = ({ title, subtitle, value, onToggle }) => (
     <TouchableOpacity
-      className="rounded-2xl p-4 mb-4 border active:scale-95"
+      className="rounded-2xl p-4 mb-4 border"
       style={{
         backgroundColor: colors.surface,
         borderColor: colors.border
       }}
       onPress={onToggle}
+      activeOpacity={0.9}
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
@@ -126,9 +127,10 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
 
         {/* Finish Button */}
         <TouchableOpacity
-          className="py-4 rounded-2xl shadow-sm active:scale-95"
+          className="py-4 rounded-2xl shadow-sm"
           style={{ backgroundColor: colors.accent.rose }}
           onPress={handleFinish}
+          activeOpacity={0.8}
         >
           <Text 
             style={{
