@@ -100,52 +100,56 @@ export default function HeroCountdown({ startDate, partnerNames }) {
   });
 
   return (
-    <View className="mx-6 mb-8">
-      <View className="items-center py-8">
-        {/* Dotted Circle Border */}
+    <View className="mx-6 mb-12">
+      <View className="items-center py-12">
+        {/* Circular Countdown */}
         <View className="relative">
-          {/* Outer dotted border */}
+          {/* Outer dotted border with more space */}
           <View 
             className="border-2 border-dashed rounded-full"
             style={{ 
-              width: 280, 
-              height: 280,
+              width: 300, 
+              height: 300,
               borderColor: colors.border
             }}
           />
           
-          {/* Main Circle */}
+          {/* Main Circle with breathing room */}
           <Animated.View 
-            className="absolute inset-4 rounded-full items-center justify-center"
+            className="absolute rounded-full items-center justify-center"
             style={{ 
+              top: 20,
+              left: 20,
+              right: 20,
+              bottom: 20,
               transform: [{ scale: pulseAnim }],
-              backgroundColor: '#F43F5E',
-              shadowColor: '#F43F5E',
+              backgroundColor: colors.accent.rose,
+              shadowColor: colors.accent.rose,
               shadowOffset: { width: 0, height: 0 },
-              shadowOpacity: 0.4,
+              shadowOpacity: 0.3,
               shadowRadius: 20,
               elevation: 8
             }}
           >
             {/* Love Icon */}
-            <View className="absolute" style={{ top: 24 }}>
+            <View className="absolute" style={{ top: 30 }}>
               <Heart size={20} color="white" fill="white" />
             </View>
             
-            {/* Main Counter */}
+            {/* Main Counter with more space */}
             <View className="items-center">
               <Text 
-                className="font-bold text-white mb-1"
+                className="font-bold text-white mb-2"
                 style={{ 
-                  fontSize: 48, 
+                  fontSize: 52, 
                   fontFamily: 'InstrumentSans_SemiCondensed-Bold',
-                  lineHeight: 52
+                  lineHeight: 56
                 }}
               >
                 {countdown.days}
               </Text>
               <Text 
-                className="text-white mb-4"
+                className="text-white mb-6"
                 style={{ 
                   fontSize: 16, 
                   fontFamily: 'InstrumentSans-Medium',
@@ -155,12 +159,12 @@ export default function HeroCountdown({ startDate, partnerNames }) {
                 days together
               </Text>
               
-              {/* Time Details */}
-              <View className="bg-white/20 rounded-2xl px-4 py-2">
+              {/* Time Details with more breathing room */}
+              <View className="bg-white/20 rounded-2xl px-6 py-3">
                 <Text 
                   className="text-white text-center"
                   style={{ 
-                    fontSize: 14, 
+                    fontSize: 15, 
                     fontFamily: 'InstrumentSans-Regular',
                     opacity: 0.9
                   }}
@@ -170,8 +174,8 @@ export default function HeroCountdown({ startDate, partnerNames }) {
               </View>
             </View>
             
-            {/* Bottom message */}
-            <View className="absolute" style={{ bottom: 24 }}>
+            {/* Bottom message with more space */}
+            <View className="absolute" style={{ bottom: 30 }}>
               <Text 
                 className="text-white text-center"
                 style={{ 
@@ -186,8 +190,8 @@ export default function HeroCountdown({ startDate, partnerNames }) {
           </Animated.View>
         </View>
         
-        {/* Names below circle */}
-        <View className="mt-6 items-center">
+        {/* Names below circle with more space */}
+        <View className="mt-8 items-center">
           <Text 
             style={{ 
               fontSize: 24, 
@@ -201,7 +205,8 @@ export default function HeroCountdown({ startDate, partnerNames }) {
             style={{ 
               fontSize: 16, 
               fontFamily: 'InstrumentSans-Regular',
-              color: colors.text.secondary
+              color: colors.text.secondary,
+              marginTop: 6
             }}
           >
             Growing stronger every day

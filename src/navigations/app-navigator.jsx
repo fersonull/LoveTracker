@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 // Bottom Tab Navigator for main app
 function MainTabs() {
     const { colors } = useTheme();
-    
+
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -35,9 +35,9 @@ function MainTabs() {
                         IconComponent = Settings;
                     }
 
-                    return <IconComponent 
-                        size={size} 
-                        color={color} 
+                    return <IconComponent
+                        size={size}
+                        color={color}
                         fill={focused ? color : 'none'}
                     />;
                 },
@@ -47,9 +47,7 @@ function MainTabs() {
                     backgroundColor: colors.surface,
                     borderTopColor: colors.border,
                     borderTopWidth: 1,
-                    height: 90,
-                    paddingBottom: 20,
-                    paddingTop: 10,
+                    height: 70,
                 },
                 tabBarLabelStyle: {
                     fontFamily: 'InstrumentSans-Medium',
@@ -61,18 +59,18 @@ function MainTabs() {
                 }
             })}
         >
-            <Tab.Screen 
-                name="Home" 
+            <Tab.Screen
+                name="Home"
                 component={DashboardScreen}
                 options={{ tabBarLabel: 'Home' }}
             />
-            <Tab.Screen 
-                name="Calendar" 
+            <Tab.Screen
+                name="Calendar"
                 component={DashboardScreen} // Placeholder for now
                 options={{ tabBarLabel: 'Memories' }}
             />
-            <Tab.Screen 
-                name="Settings" 
+            <Tab.Screen
+                name="Settings"
                 component={SettingsScreen}
                 options={{ tabBarLabel: 'Settings' }}
             />
@@ -83,7 +81,7 @@ function MainTabs() {
 export default function AppNavigator() {
     return (
         <NavigationContainer>
-            <Stack.Navigator 
+            <Stack.Navigator
                 initialRouteName="Welcome"
                 screenOptions={{
                     headerShown: false,
@@ -96,7 +94,7 @@ export default function AppNavigator() {
                 <Stack.Screen name="PartnerNames" component={PartnerNamesScreen} />
                 <Stack.Screen name="StartDate" component={StartDateScreen} />
                 <Stack.Screen name="ReminderPreferences" component={ReminderPreferencesScreen} />
-                
+
                 {/* Main App with Tabs */}
                 <Stack.Screen name="Dashboard" component={MainTabs} />
             </Stack.Navigator>
