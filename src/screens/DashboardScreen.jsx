@@ -79,17 +79,11 @@ export default function DashboardScreen({ navigation, route }) {
   }
 
   const StatCard = ({ title, value, subtitle, icon: Icon, color }) => {
-    // Use theme-aware background colors based on color
-    const cardBgColor = color === colors.accent.rose ? colors.cardBackgroundRose :
-                       color === colors.accent.pink ? colors.cardBackgroundPink :
-                       color === colors.accent.purple ? colors.cardBackgroundPurple :
-                       colors.cardBackgroundCyan;
-    
     return (
       <View 
         className="rounded-3xl p-5 shadow-sm flex-1 mx-1"
         style={{ 
-          backgroundColor: cardBgColor,
+          backgroundColor: colors.surface,
           borderWidth: 1,
           borderColor: colors.border
         }}
@@ -106,7 +100,7 @@ export default function DashboardScreen({ navigation, route }) {
             style={{ 
               fontSize: 24, 
               fontFamily: 'InstrumentSans_SemiCondensed-Bold',
-              color: color
+              color: colors.text.primary
             }}
           >
             {value}
