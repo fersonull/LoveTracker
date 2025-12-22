@@ -116,25 +116,29 @@ export default function DashboardScreen({ navigation, route }) {
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="px-6 pt-6 pb-4">
-          <View className="flex-row justify-between items-center">
-            <View>
-              <Text className="text-lg font-instrument text-gray-600">
-                Hello, Lovebirds!
-              </Text>
-              <Text className="text-base font-instrument-medium text-gray-500 mt-1">
-                {new Date().toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </Text>
-            </View>
-            <TouchableOpacity
-              className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100"
-              onPress={() => navigation.navigate('Settings')}
+          <View className="items-center">
+            <Text 
+              className="text-gray-600"
+              style={{ 
+                fontSize: 18, 
+                fontFamily: 'InstrumentSans-Regular'
+              }}
             >
-              <Settings size={22} color="#6B7280" />
-            </TouchableOpacity>
+              Hello, Lovebirds!
+            </Text>
+            <Text 
+              className="text-gray-500 mt-1"
+              style={{ 
+                fontSize: 16, 
+                fontFamily: 'InstrumentSans-Medium'
+              }}
+            >
+              {new Date().toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+            </Text>
           </View>
         </View>
 
