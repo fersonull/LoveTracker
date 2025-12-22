@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, Dimensions } from 'react-native';
 import { Heart } from 'lucide-react-native';
 import { DateUtils } from '../utils/dateCalculations';
+import { useTheme } from '../context/ThemeContext';
 
 const { width } = Dimensions.get('window');
 
@@ -15,6 +16,7 @@ export default function HeroCountdown({ startDate, partnerNames }) {
   
   const [backgroundTransition] = useState(new Animated.Value(0));
   const [pulseAnim] = useState(new Animated.Value(1));
+  const { colors } = useTheme();
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -22,14 +24,27 @@ export default function HeroCountdown({ startDate, partnerNames }) {
       
       const start = new Date(startDate);
       const now = new Date();
-      const diff = now.getTime() - start.getTime();
       
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      // Calculate the total time difference in milliseconds
+      const totalDiff = now.getTime() - start.getTime();
       
-      setCountdown({ days, hours, minutes, seconds });
+      // Calculate total days since start
+      const totalDays = Math.floor(totalDiff / (1000 * 60 * 60 * 24));
+      
+      // Calculate total hours since relationship started
+      const totalHours = Math.floor(totalDiff / (1000 * 60 * 60));
+      
+      // For minutes and seconds, use current real-time values
+      // These will reset every hour and count up from 0-59
+      const currentMinutes = now.getMinutes();
+      const currentSeconds = now.getSeconds();
+      
+      setCountdown({ 
+        days: totalDays, 
+        hours: totalHours,
+        minutes: currentMinutes, 
+        seconds: currentSeconds 
+      });
     };
 
     updateCountdown();
@@ -91,8 +106,12 @@ export default function HeroCountdown({ startDate, partnerNames }) {
         <View className="relative">
           {/* Outer dotted border */}
           <View 
-            className="border-2 border-dashed border-rose-200 rounded-full"
-            style={{ width: 280, height: 280 }}
+            className="border-2 border-dashed rounded-full"
+            style={{ 
+              width: 280, 
+              height: 280,
+              borderColor: colors.border
+            }}
           />
           
           {/* Main Circle */}
@@ -170,19 +189,19 @@ export default function HeroCountdown({ startDate, partnerNames }) {
         {/* Names below circle */}
         <View className="mt-6 items-center">
           <Text 
-            className="text-gray-800 mb-1"
             style={{ 
               fontSize: 24, 
-              fontFamily: 'InstrumentSans_SemiCondensed-Regular'
+              fontFamily: 'InstrumentSans_SemiCondensed-Regular',
+              color: colors.text.primary
             }}
           >
             {partnerNames ? `${partnerNames.partner1} & ${partnerNames.partner2}` : 'Your Love Story'}
           </Text>
           <Text 
-            className="text-gray-600"
             style={{ 
               fontSize: 16, 
-              fontFamily: 'InstrumentSans-Regular'
+              fontFamily: 'InstrumentSans-Regular',
+              color: colors.text.secondary
             }}
           >
             Growing stronger every day

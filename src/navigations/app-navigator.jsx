@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Heart, Settings, Calendar, User } from 'lucide-react-native';
+import { useTheme } from '../context/ThemeContext';
 
 // Import screens
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -17,6 +18,8 @@ const Tab = createBottomTabNavigator();
 
 // Bottom Tab Navigator for main app
 function MainTabs() {
+    const { colors } = useTheme();
+    
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -40,11 +43,11 @@ function MainTabs() {
                         fill={focused ? color : 'none'}
                     />;
                 },
-                tabBarActiveTintColor: '#F43F5E',
-                tabBarInactiveTintColor: '#9CA3AF',
+                tabBarActiveTintColor: colors.accent.rose,
+                tabBarInactiveTintColor: colors.text.muted,
                 tabBarStyle: {
-                    backgroundColor: 'white',
-                    borderTopColor: '#F3F4F6',
+                    backgroundColor: colors.surface,
+                    borderTopColor: colors.border,
                     borderTopWidth: 1,
                     height: 90,
                     paddingBottom: 20,

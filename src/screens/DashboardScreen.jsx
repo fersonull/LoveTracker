@@ -4,6 +4,7 @@ import { Heart, Settings, Calendar, Clock, Timer, Star, Trophy, Sparkles } from 
 import { StorageService } from '../utils/storage';
 import { DateUtils } from '../utils/dateCalculations';
 import HeroCountdown from '../components/HeroCountdown';
+import { useTheme } from '../context/ThemeContext';
 
 export default function DashboardScreen({ navigation, route }) {
   const [relationshipData, setRelationshipData] = useState(null);
@@ -13,6 +14,7 @@ export default function DashboardScreen({ navigation, route }) {
     years: 0,
     totalMonths: 0
   });
+  const { colors } = useTheme();
 
   useEffect(() => {
     loadRelationshipData();
@@ -58,79 +60,102 @@ export default function DashboardScreen({ navigation, route }) {
 
   if (!relationshipData) {
     return (
-      <SafeAreaView className="flex-1 bg-gradient-to-b from-pink-50 to-rose-100">
+      <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
         <View className="flex-1 justify-center items-center">
-          <Heart size={60} color="#F43F5E" fill="#F43F5E" className="mb-4" />
-          <Text className="text-lg text-gray-600 font-instrument">Loading your love story...</Text>
+          <Heart size={60} color={colors.accent.rose} fill={colors.accent.rose} />
+          <Text 
+            style={{ 
+              fontSize: 18, 
+              fontFamily: 'InstrumentSans-Regular',
+              color: colors.text.secondary,
+              marginTop: 16
+            }}
+          >
+            Loading your love story...
+          </Text>
         </View>
       </SafeAreaView>
     );
   }
 
-  const StatCard = ({ title, value, subtitle, icon: Icon, color = "#F43F5E", bgColor = "#FEF2F2" }) => (
-    <View 
-      className="rounded-3xl p-5 shadow-sm border border-gray-100 flex-1 mx-1"
-      style={{ backgroundColor: bgColor }}
-    >
-      <View className="items-center">
-        <View 
-          className="rounded-full p-3 mb-3"
-          style={{ backgroundColor: color }}
-        >
-          <Icon size={20} color="white" />
+  const StatCard = ({ title, value, subtitle, icon: Icon, color }) => {
+    // Use theme-aware background colors based on color
+    const cardBgColor = color === colors.accent.rose ? colors.cardBackgroundRose :
+                       color === colors.accent.pink ? colors.cardBackgroundPink :
+                       color === colors.accent.purple ? colors.cardBackgroundPurple :
+                       colors.cardBackgroundCyan;
+    
+    return (
+      <View 
+        className="rounded-3xl p-5 shadow-sm flex-1 mx-1"
+        style={{ 
+          backgroundColor: cardBgColor,
+          borderWidth: 1,
+          borderColor: colors.border
+        }}
+      >
+        <View className="items-center">
+          <View 
+            className="rounded-full p-3 mb-3"
+            style={{ backgroundColor: color }}
+          >
+            <Icon size={20} color="white" />
+          </View>
+          <Text 
+            className="mb-2"
+            style={{ 
+              fontSize: 24, 
+              fontFamily: 'InstrumentSans_SemiCondensed-Bold',
+              color: color
+            }}
+          >
+            {value}
+          </Text>
+          <Text 
+            className="text-center mb-1"
+            style={{ 
+              fontSize: 14, 
+              fontFamily: 'InstrumentSans-Medium',
+              color: colors.text.primary
+            }}
+          >
+            {title}
+          </Text>
+          <Text 
+            className="text-center"
+            style={{ 
+              fontSize: 11, 
+              fontFamily: 'InstrumentSans-Regular',
+              color: colors.text.secondary
+            }}
+          >
+            {subtitle}
+          </Text>
         </View>
-        <Text 
-          className="mb-2"
-          style={{ 
-            fontSize: 24, 
-            fontFamily: 'InstrumentSans_SemiCondensed-Bold',
-            color: color
-          }}
-        >
-          {value}
-        </Text>
-        <Text 
-          className="text-gray-800 text-center mb-1"
-          style={{ 
-            fontSize: 14, 
-            fontFamily: 'InstrumentSans-Medium'
-          }}
-        >
-          {title}
-        </Text>
-        <Text 
-          className="text-gray-500 text-center"
-          style={{ 
-            fontSize: 11, 
-            fontFamily: 'InstrumentSans-Regular'
-          }}
-        >
-          {subtitle}
-        </Text>
       </View>
-    </View>
-  );
+    );
+  };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="px-6 pt-6 pb-4">
           <View className="items-center">
             <Text 
-              className="text-gray-600"
               style={{ 
                 fontSize: 18, 
-                fontFamily: 'InstrumentSans-Regular'
+                fontFamily: 'InstrumentSans-Regular',
+                color: colors.text.secondary
               }}
             >
               Hello, Lovebirds!
             </Text>
             <Text 
-              className="text-gray-500 mt-1"
               style={{ 
                 fontSize: 16, 
-                fontFamily: 'InstrumentSans-Medium'
+                fontFamily: 'InstrumentSans-Medium',
+                color: colors.text.muted
               }}
             >
               {new Date().toLocaleDateString('en-US', { 
@@ -153,7 +178,14 @@ export default function DashboardScreen({ navigation, route }) {
 
         {/* Love Statistics Cards */}
         <View className="px-6 mb-8">
-          <Text className="text-lg font-instrument-semibold text-gray-800 mb-4">
+          <Text 
+            style={{ 
+              fontSize: 18, 
+              fontFamily: 'InstrumentSans-SemiBold',
+              color: colors.text.primary,
+              marginBottom: 16
+            }}
+          >
             Your Journey
           </Text>
           
@@ -164,16 +196,14 @@ export default function DashboardScreen({ navigation, route }) {
               value={Math.floor((duration.totalDays || 0) * 24).toLocaleString()}
               subtitle="Hours of memories"
               icon={Clock}
-              color="#F43F5E"
-              bgColor="#FEF2F2"
+              color={colors.accent.rose}
             />
             <StatCard
               title="Total Minutes"
               value={Math.floor((duration.totalDays || 0) * 24 * 60).toLocaleString()}
               subtitle="Precious moments"
               icon={Timer}
-              color="#EC4899"
-              bgColor="#FDF2F8"
+              color={colors.accent.pink}
             />
           </View>
 
@@ -184,16 +214,14 @@ export default function DashboardScreen({ navigation, route }) {
               value={duration.totalMonths || '0'}
               subtitle="Monthly milestones"
               icon={Calendar}
-              color="#F43F5E"
-              bgColor="#FEF2F2"
+              color={colors.accent.rose}
             />
             <StatCard
               title="Achievements"
               value={Math.floor((duration.totalDays || 0) / 100)}
               subtitle="Century marks"
               icon={Trophy}
-              color="#EC4899"
-              bgColor="#FDF2F8"
+              color={colors.accent.pink}
             />
           </View>
 
@@ -204,16 +232,14 @@ export default function DashboardScreen({ navigation, route }) {
               value={Math.floor((duration.totalDays || 0) / 7 * 2)}
               subtitle="Weekend adventures"
               icon={Star}
-              color="#8B5CF6"
-              bgColor="#F3F4F6"
+              color={colors.accent.purple}
             />
             <StatCard
               title="Seasons"
               value={Math.floor((duration.totalDays || 0) / 91)}
               subtitle="Seasons of love"
               icon={Sparkles}
-              color="#06B6D4"
-              bgColor="#F0F9FF"
+              color={colors.accent.cyan}
             />
           </View>
 
@@ -221,7 +247,7 @@ export default function DashboardScreen({ navigation, route }) {
           <View 
             className="rounded-3xl p-6 shadow-sm"
             style={{
-              backgroundColor: '#F43F5E'
+              backgroundColor: colors.accent.rose
             }}
           >
             <View className="items-center">
