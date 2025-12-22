@@ -38,18 +38,18 @@ export default function StartDateScreen({ navigation, route }) {
         {/* Header */}
         <View className="items-center mb-12">
           <Calendar size={60} color="#F43F5E" />
-          <Text className="text-3xl font-light text-gray-800 text-center mt-4">
+          <Text className="text-3xl font-instrument-sc text-gray-800 text-center mt-4">
             When did it all begin?
           </Text>
-          <Text className="text-base text-gray-600 text-center mt-2">
+          <Text className="text-base font-instrument text-gray-600 text-center mt-2">
             Choose your special start date
           </Text>
         </View>
 
         {/* Date Display */}
         <View className="bg-white/80 rounded-2xl p-6 mb-8 shadow-sm border border-pink-200">
-          <Text className="text-gray-600 text-sm mb-2">Your relationship started on:</Text>
-          <Text className="text-xl font-medium text-gray-800">
+          <Text className="text-gray-600 text-sm font-instrument mb-2">Your relationship started on:</Text>
+          <Text className="text-xl font-instrument-medium text-gray-800">
             {formatDate(selectedDate)}
           </Text>
         </View>
@@ -59,7 +59,7 @@ export default function StartDateScreen({ navigation, route }) {
           className="bg-white/80 border border-pink-200 py-4 rounded-xl mb-12 active:scale-95"
           onPress={() => setShowDatePicker(true)}
         >
-          <Text className="text-rose-600 text-lg font-medium text-center">
+          <Text className="text-rose-600 text-lg font-instrument-medium text-center">
             Change Date
           </Text>
         </TouchableOpacity>
@@ -69,7 +69,7 @@ export default function StartDateScreen({ navigation, route }) {
           className="bg-rose-500 py-4 rounded-full shadow-lg active:scale-95"
           onPress={handleContinue}
         >
-          <Text className="text-white text-lg font-medium text-center">
+          <Text className="text-white text-lg font-instrument-medium text-center">
             Continue
           </Text>
         </TouchableOpacity>

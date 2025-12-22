@@ -40,8 +40,8 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text className="text-lg font-medium text-gray-800">{title}</Text>
-          <Text className="text-gray-600 mt-1">{subtitle}</Text>
+          <Text className="text-lg font-instrument-medium text-gray-800">{title}</Text>
+          <Text className="text-gray-600 mt-1 font-instrument">{subtitle}</Text>
         </View>
         <View className={`w-6 h-6 rounded-full border-2 items-center justify-center ${
           value ? 'bg-rose-500 border-rose-500' : 'border-gray-300'
@@ -58,10 +58,10 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
         {/* Header */}
         <View className="items-center mb-12">
           <Bell size={60} color="#F43F5E" />
-          <Text className="text-3xl font-light text-gray-800 text-center mt-4">
+          <Text className="text-3xl font-instrument-sc text-gray-800 text-center mt-4">
             Never miss a milestone
           </Text>
-          <Text className="text-base text-gray-600 text-center mt-2">
+          <Text className="text-base font-instrument text-gray-600 text-center mt-2">
             Choose your gentle reminders
           </Text>
         </View>
@@ -88,7 +88,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
           className="bg-rose-500 py-4 rounded-full shadow-lg active:scale-95"
           onPress={handleFinish}
         >
-          <Text className="text-white text-lg font-medium text-center">
+          <Text className="text-white text-lg font-instrument-medium text-center">
             Start Tracking Our Love
           </Text>
         </TouchableOpacity>

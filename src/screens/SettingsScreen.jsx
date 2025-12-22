@@ -73,11 +73,11 @@ export default function SettingsScreen({ navigation }) {
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text className={`text-lg font-medium ${danger ? 'text-red-600' : 'text-gray-800'}`}>
+          <Text className={`text-lg font-instrument-medium ${danger ? 'text-red-600' : 'text-gray-800'}`}>
             {title}
           </Text>
           {subtitle && (
-            <Text className="text-gray-600 mt-1">{subtitle}</Text>
+            <Text className="text-gray-600 mt-1 font-instrument">{subtitle}</Text>
           )}
         </View>
         {rightElement}
@@ -115,12 +115,12 @@ export default function SettingsScreen({ navigation }) {
             >
               <ArrowLeft size={24} color="#F43F5E" />
             </TouchableOpacity>
-            <Text className="text-2xl font-light text-gray-800">Settings</Text>
+            <Text className="text-2xl font-instrument-sc text-gray-800">Settings</Text>
           </View>
 
           {/* Relationship Info */}
           <View className="mb-8">
-            <Text className="text-lg font-medium text-gray-800 mb-4">Relationship Details</Text>
+            <Text className="text-lg font-instrument-semibold text-gray-800 mb-4">Relationship Details</Text>
             
             <SettingItem
               title="Edit Names"
@@ -139,7 +139,7 @@ export default function SettingsScreen({ navigation }) {
 
           {/* Notification Preferences */}
           <View className="mb-8">
-            <Text className="text-lg font-medium text-gray-800 mb-4">Notifications</Text>
+            <Text className="text-lg font-instrument-semibold text-gray-800 mb-4">Notifications</Text>
             
             <SettingItem
               title="Monthly Reminders"
@@ -158,7 +158,7 @@ export default function SettingsScreen({ navigation }) {
 
           {/* Danger Zone */}
           <View>
-            <Text className="text-lg font-medium text-gray-800 mb-4">Danger Zone</Text>
+            <Text className="text-lg font-instrument-semibold text-gray-800 mb-4">Danger Zone</Text>
             
             <SettingItem
               title="Reset All Data"

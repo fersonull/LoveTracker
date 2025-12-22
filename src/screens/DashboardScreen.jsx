@@ -59,7 +59,7 @@ export default function DashboardScreen({ navigation, route }) {
     return (
       <SafeAreaView className="flex-1 bg-gradient-to-b from-pink-50 to-rose-100">
         <View className="flex-1 justify-center items-center">
-          <Text className="text-lg text-gray-600">Loading your love story...</Text>
+          <Text className="text-lg text-gray-600 font-instrument">Loading your love story...</Text>
         </View>
       </SafeAreaView>
     );
@@ -69,10 +69,10 @@ export default function DashboardScreen({ navigation, route }) {
     <View className="bg-white/90 rounded-2xl p-6 mb-4 shadow-sm border border-pink-100">
       <View className="flex-row items-center mb-3">
         <Icon size={24} color="#F43F5E" />
-        <Text className="text-gray-600 ml-3 font-medium">{title}</Text>
+        <Text className="text-gray-600 ml-3 font-instrument-medium">{title}</Text>
       </View>
-      <Text className="text-3xl font-light text-gray-800 mb-1">{value}</Text>
-      <Text className="text-gray-500">{subtitle}</Text>
+      <Text className="text-3xl font-instrument-sc text-gray-800 mb-1">{value}</Text>
+      <Text className="text-gray-500 font-instrument">{subtitle}</Text>
     </View>
   );
 
@@ -83,10 +83,10 @@ export default function DashboardScreen({ navigation, route }) {
         <View className="px-8 pt-4 pb-8">
           <View className="flex-row justify-between items-center mb-8">
             <View>
-              <Text className="text-2xl font-light text-gray-800">
+              <Text className="text-2xl font-instrument-sc text-gray-800">
                 {relationshipData.partner1Name} & {relationshipData.partner2Name}
               </Text>
-              <Text className="text-gray-600 mt-1">
+              <Text className="text-gray-600 mt-1 font-instrument">
                 Growing together since {formatStartDate()}
               </Text>
             </View>

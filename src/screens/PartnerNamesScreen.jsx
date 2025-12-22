@@ -25,10 +25,10 @@ export default function PartnerNamesScreen({ navigation }) {
           {/* Header */}
           <View className="items-center mb-12">
             <Users size={60} color="#F43F5E" />
-            <Text className="text-3xl font-light text-gray-800 text-center mt-4">
+            <Text className="text-3xl font-instrument-sc text-gray-800 text-center mt-4">
               Who are the lovebirds?
             </Text>
-            <Text className="text-base text-gray-600 text-center mt-2">
+            <Text className="text-base font-instrument text-gray-600 text-center mt-2">
               Tell us your beautiful names
             </Text>
           </View>
@@ -36,9 +36,9 @@ export default function PartnerNamesScreen({ navigation }) {
           {/* Input Fields */}
           <View className="space-y-6 mb-12">
             <View>
-              <Text className="text-gray-700 font-medium mb-2">First Partner</Text>
+              <Text className="text-gray-700 font-instrument-medium mb-2">First Partner</Text>
               <TextInput
-                className="bg-white/80 px-4 py-4 rounded-xl text-lg border border-pink-200 focus:border-rose-400"
+                className="bg-white/80 px-4 py-4 rounded-xl text-lg border border-pink-200 focus:border-rose-400 font-instrument"
                 placeholder="Your name"
                 placeholderTextColor="#9CA3AF"
                 value={partner1Name}
@@ -48,9 +48,9 @@ export default function PartnerNamesScreen({ navigation }) {
             </View>
 
             <View>
-              <Text className="text-gray-700 font-medium mb-2">Second Partner</Text>
+              <Text className="text-gray-700 font-instrument-medium mb-2">Second Partner</Text>
               <TextInput
-                className="bg-white/80 px-4 py-4 rounded-xl text-lg border border-pink-200 focus:border-rose-400"
+                className="bg-white/80 px-4 py-4 rounded-xl text-lg border border-pink-200 focus:border-rose-400 font-instrument"
                 placeholder="Your partner's name"
                 placeholderTextColor="#9CA3AF"
                 value={partner2Name}
@@ -70,7 +70,7 @@ export default function PartnerNamesScreen({ navigation }) {
             onPress={handleContinue}
             disabled={!partner1Name.trim() || !partner2Name.trim()}
           >
-            <Text className={`text-lg font-medium text-center ${
+            <Text className={`text-lg font-instrument-medium text-center ${
               partner1Name.trim() && partner2Name.trim() 
                 ? 'text-white' 
                 : 'text-gray-500'

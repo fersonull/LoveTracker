@@ -31,8 +31,23 @@ module.exports = {
         }
       },
       fontFamily: {
-        'light': ['System'],
-        'medium': ['System'],
+        // Regular weights for body text
+        'instrument': ['InstrumentSans-Regular'],
+        'instrument-medium': ['InstrumentSans-Medium'], 
+        'instrument-semibold': ['InstrumentSans-SemiBold'],
+        'instrument-bold': ['InstrumentSans-Bold'],
+        
+        // Semi-condensed for headings (more elegant)
+        'instrument-sc': ['InstrumentSans_SemiCondensed-Regular'],
+        'instrument-sc-medium': ['InstrumentSans_SemiCondensed-Medium'],
+        'instrument-sc-semibold': ['InstrumentSans_SemiCondensed-SemiBold'],
+        'instrument-sc-bold': ['InstrumentSans_SemiCondensed-Bold'],
+        
+        // Condensed for special elements
+        'instrument-condensed': ['InstrumentSans_Condensed-Regular'],
+        'instrument-condensed-medium': ['InstrumentSans_Condensed-Medium'],
+        'instrument-condensed-semibold': ['InstrumentSans_Condensed-SemiBold'],
+        'instrument-condensed-bold': ['InstrumentSans_Condensed-Bold'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

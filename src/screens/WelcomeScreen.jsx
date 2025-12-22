@@ -12,11 +12,11 @@ export default function WelcomeScreen({ navigation }) {
         </View>
 
         {/* Main Message */}
-        <Text className="text-4xl font-light text-gray-800 text-center mb-4">
+        <Text className="text-4xl font-instrument-sc text-gray-800 text-center mb-4">
           Every love has a beginning
         </Text>
         
-        <Text className="text-lg font-light text-gray-600 text-center mb-16 leading-relaxed">
+        <Text className="text-lg font-instrument text-gray-600 text-center mb-16 leading-relaxed">
           Let's celebrate your beautiful journey together
         </Text>
 
@@ -25,7 +25,7 @@ export default function WelcomeScreen({ navigation }) {
           className="bg-rose-500 px-12 py-4 rounded-full shadow-lg active:scale-95"
           onPress={() => navigation.navigate('PartnerNames')}
         >
-          <Text className="text-white text-lg font-medium">Start Your Story</Text>
+          <Text className="text-white text-lg font-instrument-medium">Start Your Story</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
