@@ -1,0 +1,15 @@
+Installed Dependencies:
+- tailwindcss
+- nativewind
+- @react-navigation/native
+- @react-navigation/native-stack
+- @react-navigation/bottom-tabs
+- @react-navigation/drawer
+- react-native-screens
+- react-native-safe-area-context
+- react-native-worklets
+- react-native-reanimated
+- react-native-gesture-handler
+- react-native-svg
+- react-native-bootsplash
+- lucide-react-native
