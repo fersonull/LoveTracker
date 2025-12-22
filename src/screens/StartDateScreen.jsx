@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
 import { Calendar } from 'lucide-react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useTheme } from '../context/ThemeContext';
 
 export default function StartDateScreen({ navigation, route }) {
   const { partner1Name, partner2Name } = route.params;
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const { colors } = useTheme();
 
   const formatDate = (date) => {
     return date.toLocaleDateString('en-US', {
@@ -33,43 +35,97 @@ export default function StartDateScreen({ navigation, route }) {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gradient-to-b from-pink-50 to-rose-100">
+    <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
       <View className="flex-1 justify-center px-8">
         {/* Header */}
         <View className="items-center mb-12">
-          <Calendar size={60} color="#F43F5E" />
-          <Text className="text-3xl font-instrument-sc text-gray-800 text-center mt-4">
+          <Calendar size={48} color={colors.accent.rose} />
+          <Text 
+            className="text-center mt-4"
+            style={{
+              fontSize: 28,
+              fontFamily: 'InstrumentSans_SemiCondensed-Regular',
+              color: colors.text.primary
+            }}
+          >
             When did it all begin?
           </Text>
-          <Text className="text-base font-instrument text-gray-600 text-center mt-2">
+          <Text 
+            className="text-center mt-2"
+            style={{
+              fontSize: 16,
+              fontFamily: 'InstrumentSans-Regular',
+              color: colors.text.secondary
+            }}
+          >
             Choose your special start date
           </Text>
         </View>
 
         {/* Date Display */}
-        <View className="bg-white/80 rounded-2xl p-6 mb-8 shadow-sm border border-pink-200">
-          <Text className="text-gray-600 text-sm font-instrument mb-2">Your relationship started on:</Text>
-          <Text className="text-xl font-instrument-medium text-gray-800">
+        <View 
+          className="rounded-2xl p-6 mb-8 border"
+          style={{
+            backgroundColor: colors.surface,
+            borderColor: colors.border
+          }}
+        >
+          <Text 
+            style={{
+              fontFamily: 'InstrumentSans-Regular',
+              color: colors.text.secondary,
+              fontSize: 14,
+              marginBottom: 8
+            }}
+          >
+            Your relationship started on:
+          </Text>
+          <Text 
+            style={{
+              fontSize: 18,
+              fontFamily: 'InstrumentSans-Medium',
+              color: colors.text.primary
+            }}
+          >
             {formatDate(selectedDate)}
           </Text>
         </View>
 
         {/* Date Picker Button */}
         <TouchableOpacity
-          className="bg-white/80 border border-pink-200 py-4 rounded-xl mb-12 active:scale-95"
+          className="py-4 rounded-2xl mb-12 border active:scale-95"
+          style={{
+            backgroundColor: colors.surface,
+            borderColor: colors.border
+          }}
           onPress={() => setShowDatePicker(true)}
         >
-          <Text className="text-rose-600 text-lg font-instrument-medium text-center">
+          <Text 
+            style={{
+              color: colors.accent.rose,
+              fontSize: 16,
+              fontFamily: 'InstrumentSans-Medium',
+              textAlign: 'center'
+            }}
+          >
             Change Date
           </Text>
         </TouchableOpacity>
 
         {/* Continue Button */}
         <TouchableOpacity
-          className="bg-rose-500 py-4 rounded-full shadow-lg active:scale-95"
+          className="py-4 rounded-2xl shadow-sm active:scale-95"
+          style={{ backgroundColor: colors.accent.rose }}
           onPress={handleContinue}
         >
-          <Text className="text-white text-lg font-instrument-medium text-center">
+          <Text 
+            style={{
+              color: 'white',
+              fontSize: 16,
+              fontFamily: 'InstrumentSans-Medium',
+              textAlign: 'center'
+            }}
+          >
             Continue
           </Text>
         </TouchableOpacity>
