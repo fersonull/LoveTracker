@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
-import { Heart, Settings, Calendar } from 'lucide-react-native';
+import { Heart, Settings, Calendar, Clock, Timer, Star, Trophy, Sparkles } from 'lucide-react-native';
 import { StorageService } from '../utils/storage';
 import { DateUtils } from '../utils/dateCalculations';
+import HeroCountdown from '../components/HeroCountdown';
 
 export default function DashboardScreen({ navigation, route }) {
   const [relationshipData, setRelationshipData] = useState(null);
@@ -59,66 +60,189 @@ export default function DashboardScreen({ navigation, route }) {
     return (
       <SafeAreaView className="flex-1 bg-gradient-to-b from-pink-50 to-rose-100">
         <View className="flex-1 justify-center items-center">
+          <Heart size={60} color="#F43F5E" fill="#F43F5E" className="mb-4" />
           <Text className="text-lg text-gray-600 font-instrument">Loading your love story...</Text>
         </View>
       </SafeAreaView>
     );
   }
 
-  const DurationCard = ({ title, value, subtitle, icon: Icon }) => (
-    <View className="bg-white/90 rounded-2xl p-6 mb-4 shadow-sm border border-pink-100">
-      <View className="flex-row items-center mb-3">
-        <Icon size={24} color="#F43F5E" />
-        <Text className="text-gray-600 ml-3 font-instrument-medium">{title}</Text>
+  const StatCard = ({ title, value, subtitle, icon: Icon, color = "#F43F5E", bgColor = "#FEF2F2" }) => (
+    <View 
+      className="rounded-3xl p-5 shadow-sm border border-gray-100 flex-1 mx-1"
+      style={{ backgroundColor: bgColor }}
+    >
+      <View className="items-center">
+        <View 
+          className="rounded-full p-3 mb-3"
+          style={{ backgroundColor: color }}
+        >
+          <Icon size={20} color="white" />
+        </View>
+        <Text 
+          className="mb-2"
+          style={{ 
+            fontSize: 24, 
+            fontFamily: 'InstrumentSans_SemiCondensed-Bold',
+            color: color
+          }}
+        >
+          {value}
+        </Text>
+        <Text 
+          className="text-gray-800 text-center mb-1"
+          style={{ 
+            fontSize: 14, 
+            fontFamily: 'InstrumentSans-Medium'
+          }}
+        >
+          {title}
+        </Text>
+        <Text 
+          className="text-gray-500 text-center"
+          style={{ 
+            fontSize: 11, 
+            fontFamily: 'InstrumentSans-Regular'
+          }}
+        >
+          {subtitle}
+        </Text>
       </View>
-      <Text className="text-3xl font-instrument-sc text-gray-800 mb-1">{value}</Text>
-      <Text className="text-gray-500 font-instrument">{subtitle}</Text>
     </View>
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-gradient-to-b from-pink-50 to-rose-100">
+    <SafeAreaView className="flex-1 bg-gray-50">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className="px-8 pt-4 pb-8">
-          <View className="flex-row justify-between items-center mb-8">
+        <View className="px-6 pt-6 pb-4">
+          <View className="flex-row justify-between items-center">
             <View>
-              <Text className="text-2xl font-instrument-sc text-gray-800">
-                {relationshipData.partner1Name} & {relationshipData.partner2Name}
+              <Text className="text-lg font-instrument text-gray-600">
+                Hello, Lovebirds!
               </Text>
-              <Text className="text-gray-600 mt-1 font-instrument">
-                Growing together since {formatStartDate()}
+              <Text className="text-base font-instrument-medium text-gray-500 mt-1">
+                {new Date().toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })}
               </Text>
             </View>
             <TouchableOpacity
-              className="bg-white/80 p-3 rounded-full border border-pink-200"
+              className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100"
               onPress={() => navigation.navigate('Settings')}
             >
-              <Settings size={24} color="#F43F5E" />
+              <Settings size={22} color="#6B7280" />
             </TouchableOpacity>
           </View>
+        </View>
 
-          {/* Duration Cards */}
-          <DurationCard
-            title="Days Together"
-            value={duration.totalDays?.toLocaleString() || '0'}
-            subtitle="Every day counts ❤️"
-            icon={Heart}
-          />
+        {/* Hero Countdown Section */}
+        <HeroCountdown 
+          startDate={relationshipData.startDate}
+          partnerNames={{
+            partner1: relationshipData.partner1Name,
+            partner2: relationshipData.partner2Name
+          }}
+        />
 
-          <DurationCard
-            title="Months Together"
-            value={duration.totalMonths?.toLocaleString() || '0'}
-            subtitle="Growing stronger each month 💕"
-            icon={Calendar}
-          />
+        {/* Love Statistics Cards */}
+        <View className="px-6 mb-8">
+          <Text className="text-lg font-instrument-semibold text-gray-800 mb-4">
+            Your Journey
+          </Text>
+          
+          {/* First row - Time stats */}
+          <View className="flex-row mb-4">
+            <StatCard
+              title="Total Hours"
+              value={Math.floor((duration.totalDays || 0) * 24).toLocaleString()}
+              subtitle="Hours of memories"
+              icon={Clock}
+              color="#F43F5E"
+              bgColor="#FEF2F2"
+            />
+            <StatCard
+              title="Total Minutes"
+              value={Math.floor((duration.totalDays || 0) * 24 * 60).toLocaleString()}
+              subtitle="Precious moments"
+              icon={Timer}
+              color="#EC4899"
+              bgColor="#FDF2F8"
+            />
+          </View>
 
-          <DurationCard
-            title="Years & Months"
-            value={DateUtils.formatDuration(duration)}
-            subtitle="A beautiful journey together 🌹"
-            icon={Heart}
-          />
+          {/* Second row - Milestone stats */}
+          <View className="flex-row mb-4">
+            <StatCard
+              title="Months Together"
+              value={duration.totalMonths || '0'}
+              subtitle="Monthly milestones"
+              icon={Calendar}
+              color="#F43F5E"
+              bgColor="#FEF2F2"
+            />
+            <StatCard
+              title="Achievements"
+              value={Math.floor((duration.totalDays || 0) / 100)}
+              subtitle="Century marks"
+              icon={Trophy}
+              color="#EC4899"
+              bgColor="#FDF2F8"
+            />
+          </View>
+
+          {/* Third row - Special metrics */}
+          <View className="flex-row mb-6">
+            <StatCard
+              title="Weekends"
+              value={Math.floor((duration.totalDays || 0) / 7 * 2)}
+              subtitle="Weekend adventures"
+              icon={Star}
+              color="#8B5CF6"
+              bgColor="#F3F4F6"
+            />
+            <StatCard
+              title="Seasons"
+              value={Math.floor((duration.totalDays || 0) / 91)}
+              subtitle="Seasons of love"
+              icon={Sparkles}
+              color="#06B6D4"
+              bgColor="#F0F9FF"
+            />
+          </View>
+
+          {/* Single full-width card */}
+          <View 
+            className="rounded-3xl p-6 shadow-sm"
+            style={{
+              backgroundColor: '#F43F5E'
+            }}
+          >
+            <View className="items-center">
+              <Heart size={32} color="white" fill="white" />
+              <Text 
+                className="text-white mt-3 mb-2"
+                style={{ 
+                  fontSize: 24, 
+                  fontFamily: 'InstrumentSans_SemiCondensed-Bold'
+                }}
+              >
+                {DateUtils.formatDuration(duration)}
+              </Text>
+              <Text 
+                className="text-white text-center"
+                style={{ 
+                  fontSize: 16, 
+                  fontFamily: 'InstrumentSans-Regular',
+                  opacity: 0.9
+                }}
+              >
+                Your beautiful love story continues
+              </Text>
+            </View>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
