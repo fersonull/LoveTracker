@@ -5,12 +5,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Heart, Settings, Calendar } from 'lucide-react-native';
 import { useTheme } from '../context/ThemeContext';
 
-import WelcomeScreen from '../screens/welcome-screen';
+import WelcomeScreen from '../screens/onboarding/welcome-screen';
 import PartnerNamesScreen from '../screens/onboarding/partner-name-screen';
 import StartDateScreen from '../screens/onboarding/start-date-screen';
 import ReminderPreferencesScreen from '../screens/onboarding/reminder-preference-screen';
-import DashboardScreen from '../screens/dashboard-screen';
-import SettingsScreen from '../screens/settings-screen';
+import DashboardScreen from '../screens/main/dashboard-screen';
+import SettingsScreen from '../screens/main/settings-screen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

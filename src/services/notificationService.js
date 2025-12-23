@@ -1,5 +1,5 @@
 import notifee, { TriggerType, RepeatFrequency } from '@notifee/react-native';
-import { DateUtils } from '../utils/dateCalculations';
+import { DateUtils } from '../utils/date-calculation';
 
 export class NotificationService {
   static async requestPermission() {
@@ -33,16 +33,16 @@ export class NotificationService {
       if (!relationshipData.preferences.monthlyReminder) return;
 
       await this.createChannel();
-      
+
       const startDate = new Date(relationshipData.startDate);
       const { nextMonthsary } = DateUtils.getNextMilestones(relationshipData.startDate);
-      
+
       // Schedule notification for 10 AM on monthsary
       nextMonthsary.setHours(10, 0, 0, 0);
-      
+
       const duration = DateUtils.calculateDuration(relationshipData.startDate);
       const monthCount = duration.totalMonths + 1; // Next month
-      
+
       await notifee.createTriggerNotification(
         {
           id: 'monthly-reminder',
@@ -63,7 +63,7 @@ export class NotificationService {
           repeatFrequency: RepeatFrequency.MONTHLY,
         }
       );
-      
+
       console.log('Monthly reminder scheduled for:', nextMonthsary);
     } catch (error) {
       console.error('Error scheduling monthly reminder:', error);
@@ -75,15 +75,15 @@ export class NotificationService {
       if (!relationshipData.preferences.yearlyReminder) return;
 
       await this.createChannel();
-      
+
       const { nextAnniversary } = DateUtils.getNextMilestones(relationshipData.startDate);
-      
+
       // Schedule notification for 9 AM on anniversary
       nextAnniversary.setHours(9, 0, 0, 0);
-      
+
       const duration = DateUtils.calculateDuration(relationshipData.startDate);
       const yearCount = duration.years + (nextAnniversary.getFullYear() > new Date().getFullYear() ? 1 : 0);
-      
+
       await notifee.createTriggerNotification(
         {
           id: 'anniversary-reminder',
@@ -104,7 +104,7 @@ export class NotificationService {
           repeatFrequency: RepeatFrequency.YEARLY,
         }
       );
-      
+
       console.log('Anniversary reminder scheduled for:', nextAnniversary);
     } catch (error) {
       console.error('Error scheduling anniversary reminder:', error);
@@ -114,7 +114,7 @@ export class NotificationService {
   static async scheduleAllReminders(relationshipData) {
     // Clear existing reminders first
     await this.clearAllReminders();
-    
+
     // Request permission
     const hasPermission = await this.requestPermission();
     if (!hasPermission) {

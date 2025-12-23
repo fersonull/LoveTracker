@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Heart } from 'lucide-react-native';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
 
 export default function WelcomeScreen({ navigation }) {
   const { colors } = useTheme();
-  
+
   return (
     <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
       <View className="flex-1 justify-center items-center px-8">
@@ -15,7 +15,7 @@ export default function WelcomeScreen({ navigation }) {
         </View>
 
         {/* Main Message */}
-        <Text 
+        <Text
           className="text-center mb-4"
           style={{
             fontSize: 32,
@@ -26,8 +26,8 @@ export default function WelcomeScreen({ navigation }) {
         >
           Every love has a beginning
         </Text>
-        
-        <Text 
+
+        <Text
           className="text-center mb-16"
           style={{
             fontSize: 16,
@@ -41,13 +41,13 @@ export default function WelcomeScreen({ navigation }) {
         </Text>
 
         {/* CTA Button */}
-        <TouchableOpacity 
+        <TouchableOpacity
           className="px-12 py-4 rounded-2xl shadow-sm"
           style={{ backgroundColor: colors.accent.rose }}
           onPress={() => navigation.navigate('PartnerNames')}
           activeOpacity={0.8}
         >
-          <Text 
+          <Text
             style={{
               color: 'white',
               fontSize: 16,

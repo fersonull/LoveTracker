@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Heart, Settings, Calendar, Clock, Timer, Star, Trophy, Sparkles } from 'lucide-react-native';
-import { StorageService } from '../utils/storage';
-import { DateUtils } from '../utils/dateCalculations';
-import HeroCountdown from '../components/HeroCountdown';
-import { useTheme } from '../context/ThemeContext';
+import { StorageService } from '../../utils/storage';
+import { DateUtils } from '../../utils/date-calculation';
+import HeroCountdown from '../../components/dashboard/hero-countdown';
+import { useTheme } from '../../context/ThemeContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function DashboardScreen({ navigation, route }) {
   const [relationshipData, setRelationshipData] = useState(null);

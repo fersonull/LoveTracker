@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { ArrowLeft, Edit3, Bell, Trash2, Check, Moon, Sun } from 'lucide-react-native';
-import { StorageService } from '../utils/storage';
-import { NotificationService } from '../services/notificationService';
-import { useTheme } from '../context/ThemeContext';
+import { StorageService } from '../../utils/storage';
+import { NotificationService } from '../../services/notificationService';
+import { useTheme } from '../../context/ThemeContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SettingsScreen({ navigation }) {
   const [relationshipData, setRelationshipData] = useState(null);
@@ -30,14 +31,14 @@ export default function SettingsScreen({ navigation }) {
       "Are you sure you want to reset all your relationship data? This action cannot be undone.",
       [
         { text: "Cancel", style: "cancel" },
-        { 
-          text: "Reset", 
+        {
+          text: "Reset",
           style: "destructive",
           onPress: async () => {
             // Clear all data and notifications
             await StorageService.clearRelationshipData();
             await NotificationService.clearAllReminders();
-            
+
             navigation.reset({
               index: 0,
               routes: [{ name: 'Welcome' }],
@@ -57,10 +58,10 @@ export default function SettingsScreen({ navigation }) {
       }
     };
     setRelationshipData(updatedData);
-    
+
     // Save to storage
     await StorageService.saveRelationshipData(updatedData);
-    
+
     // Update notifications
     await NotificationService.scheduleAllReminders(updatedData);
   };
@@ -78,9 +79,9 @@ export default function SettingsScreen({ navigation }) {
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text 
-            style={{ 
-              fontSize: 18, 
+          <Text
+            style={{
+              fontSize: 18,
               fontFamily: 'InstrumentSans-Medium',
               color: danger ? '#DC2626' : colors.text.primary
             }}
@@ -88,9 +89,9 @@ export default function SettingsScreen({ navigation }) {
             {title}
           </Text>
           {subtitle && (
-            <Text 
-              style={{ 
-                fontSize: 14, 
+            <Text
+              style={{
+                fontSize: 14,
                 fontFamily: 'InstrumentSans-Regular',
                 color: colors.text.secondary,
                 marginTop: 4
@@ -106,7 +107,7 @@ export default function SettingsScreen({ navigation }) {
   );
 
   const ToggleSwitch = ({ value }) => (
-    <View 
+    <View
       className="w-6 h-6 rounded-full border-2 items-center justify-center"
       style={{
         backgroundColor: value ? colors.accent.rose : 'transparent',
@@ -145,9 +146,9 @@ export default function SettingsScreen({ navigation }) {
             >
               <ArrowLeft size={24} color={colors.accent.rose} />
             </TouchableOpacity>
-            <Text 
-              style={{ 
-                fontSize: 24, 
+            <Text
+              style={{
+                fontSize: 24,
                 fontFamily: 'InstrumentSans_SemiCondensed-Regular',
                 color: colors.text.primary
               }}
@@ -158,9 +159,9 @@ export default function SettingsScreen({ navigation }) {
 
           {/* Appearance */}
           <View className="mb-8">
-            <Text 
-              style={{ 
-                fontSize: 18, 
+            <Text
+              style={{
+                fontSize: 18,
                 fontFamily: 'InstrumentSans-SemiBold',
                 color: colors.text.primary,
                 marginBottom: 16
@@ -168,13 +169,13 @@ export default function SettingsScreen({ navigation }) {
             >
               Appearance
             </Text>
-            
+
             <SettingItem
               title="Dark Mode"
               subtitle={`Currently using ${isDarkMode ? 'dark' : 'light'} theme`}
               onPress={toggleTheme}
               rightElement={
-                <View 
+                <View
                   className="p-2 rounded-full"
                   style={{ backgroundColor: colors.accent.rose }}
                 >
@@ -190,9 +191,9 @@ export default function SettingsScreen({ navigation }) {
 
           {/* Relationship Info */}
           <View className="mb-8">
-            <Text 
-              style={{ 
-                fontSize: 18, 
+            <Text
+              style={{
+                fontSize: 18,
                 fontFamily: 'InstrumentSans-SemiBold',
                 color: colors.text.primary,
                 marginBottom: 16
@@ -200,27 +201,27 @@ export default function SettingsScreen({ navigation }) {
             >
               Relationship Details
             </Text>
-            
+
             <SettingItem
               title="Edit Names"
               subtitle={`${relationshipData.partner1Name} & ${relationshipData.partner2Name}`}
-              onPress={() => {/* TODO: Navigate to edit names */}}
+              onPress={() => {/* TODO: Navigate to edit names */ }}
               rightElement={<Edit3 size={20} color={colors.text.muted} />}
             />
 
             <SettingItem
               title="Edit Start Date"
               subtitle={new Date(relationshipData.startDate).toLocaleDateString()}
-              onPress={() => {/* TODO: Navigate to edit date */}}
+              onPress={() => {/* TODO: Navigate to edit date */ }}
               rightElement={<Edit3 size={20} color={colors.text.muted} />}
             />
           </View>
 
           {/* Notification Preferences */}
           <View className="mb-8">
-            <Text 
-              style={{ 
-                fontSize: 18, 
+            <Text
+              style={{
+                fontSize: 18,
                 fontFamily: 'InstrumentSans-SemiBold',
                 color: colors.text.primary,
                 marginBottom: 16
@@ -228,7 +229,7 @@ export default function SettingsScreen({ navigation }) {
             >
               Notifications
             </Text>
-            
+
             <SettingItem
               title="Monthly Reminders"
               subtitle="Get notified on your monthsary"
@@ -246,9 +247,9 @@ export default function SettingsScreen({ navigation }) {
 
           {/* Danger Zone */}
           <View>
-            <Text 
-              style={{ 
-                fontSize: 18, 
+            <Text
+              style={{
+                fontSize: 18,
                 fontFamily: 'InstrumentSans-SemiBold',
                 color: colors.text.primary,
                 marginBottom: 16
@@ -256,7 +257,7 @@ export default function SettingsScreen({ navigation }) {
             >
               Danger Zone
             </Text>
-            
+
             <SettingItem
               title="Reset All Data"
               subtitle="This will delete all your relationship data"

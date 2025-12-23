@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text } from 'react-native';
 import { Heart } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function LoadingScreen({ message = "Loading your love story..." }) {
   return (
@@ -10,7 +10,7 @@ export default function LoadingScreen({ message = "Loading your love story..." }
         <View className="mb-8">
           <Heart size={60} color="#F43F5E" fill="#F43F5E" />
         </View>
-        
+
         {/* Loading Message */}
         <Text className="text-lg text-gray-600 text-center">
           {message}

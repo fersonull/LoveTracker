@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, Dimensions } from 'react-native';
 import { Heart, MousePointerClick } from 'lucide-react-native';
-import { DateUtils } from '../utils/dateCalculations';
-import { useTheme } from '../context/ThemeContext';
+import { DateUtils } from '../../utils/date-calculation';
+import { useTheme } from '../../context/ThemeContext';
 
 const { width } = Dimensions.get('window');
 
