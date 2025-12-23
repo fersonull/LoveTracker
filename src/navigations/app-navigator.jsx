@@ -5,18 +5,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Heart, Settings, Calendar } from 'lucide-react-native';
 import { useTheme } from '../context/ThemeContext';
 
-// Import screens
-import WelcomeScreen from '../screens/WelcomeScreen';
-import PartnerNamesScreen from '../screens/PartnerNamesScreen';
-import StartDateScreen from '../screens/StartDateScreen';
-import ReminderPreferencesScreen from '../screens/ReminderPreferencesScreen';
-import DashboardScreen from '../screens/DashboardScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import WelcomeScreen from '../screens/welcome-screen';
+import PartnerNamesScreen from '../screens/onboarding/partner-name-screen';
+import StartDateScreen from '../screens/onboarding/start-date-screen';
+import ReminderPreferencesScreen from '../screens/onboarding/reminder-preference-screen';
+import DashboardScreen from '../screens/dashboard-screen';
+import SettingsScreen from '../screens/settings-screen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// Bottom Tab Navigator for main app
 function MainTabs() {
     const { colors } = useTheme();
 
@@ -66,7 +64,7 @@ function MainTabs() {
             />
             <Tab.Screen
                 name="Calendar"
-                component={DashboardScreen} // Placeholder for now
+                component={DashboardScreen}
                 options={{ tabBarLabel: 'Memories' }}
             />
             <Tab.Screen
@@ -89,13 +87,11 @@ export default function AppNavigator() {
                     gestureEnabled: true
                 }}
             >
-                {/* Onboarding Flow */}
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="PartnerNames" component={PartnerNamesScreen} />
                 <Stack.Screen name="StartDate" component={StartDateScreen} />
                 <Stack.Screen name="ReminderPreferences" component={ReminderPreferencesScreen} />
 
-                {/* Main App with Tabs */}
                 <Stack.Screen name="Dashboard" component={MainTabs} />
             </Stack.Navigator>
         </NavigationContainer>

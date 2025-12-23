@@ -102,9 +102,7 @@ export default function HeroCountdown({ startDate, partnerNames }) {
   return (
     <View className="mx-6 mb-12">
       <View className="items-center py-12">
-        {/* Circular Countdown */}
         <View className="relative">
-          {/* Outer dotted border with more space */}
           <View
             className="border-2 border-dashed rounded-full"
             style={{
@@ -114,7 +112,6 @@ export default function HeroCountdown({ startDate, partnerNames }) {
             }}
           />
 
-          {/* Main Circle with breathing room */}
           <Animated.View
             className="absolute rounded-full items-center justify-center"
             style={{
@@ -131,12 +128,10 @@ export default function HeroCountdown({ startDate, partnerNames }) {
               elevation: 8
             }}
           >
-            {/* Love Icon */}
             <View className="absolute" style={{ top: 30 }}>
               <MousePointerClick size={20} color="white" fill="white" />
             </View>
 
-            {/* Main Counter with more space */}
             <View className="items-center">
               <Text
                 className="font-bold text-white mb-2"
@@ -159,7 +154,6 @@ export default function HeroCountdown({ startDate, partnerNames }) {
                 days together
               </Text>
 
-              {/* Time Details with more breathing room */}
               <View className="bg-white/20 rounded-2xl px-6 py-3">
                 <Text
                   className="text-white text-center"
@@ -177,7 +171,6 @@ export default function HeroCountdown({ startDate, partnerNames }) {
           </Animated.View>
         </View>
 
-        {/* Names below circle with more space */}
         <View className="mt-8 items-center">
           <Text
             style={{

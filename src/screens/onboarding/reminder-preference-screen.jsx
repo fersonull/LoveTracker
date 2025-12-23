@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Bell, Check } from 'lucide-react-native';
-import { StorageService } from '../utils/storage';
-import { NotificationService } from '../services/notificationService';
-import { useTheme } from '../context/ThemeContext';
+import { StorageService } from '../../utils/storage';
+import { NotificationService } from '../../services/notificationService';
+import { useTheme } from '../../context/ThemeContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ReminderPreferencesScreen({ navigation, route }) {
   const { partner1Name, partner2Name, startDate } = route.params;
@@ -22,13 +23,13 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
       },
       createdAt: new Date().toISOString()
     };
-    
+
     // Save data to storage
     await StorageService.saveRelationshipData(relationshipData);
-    
+
     // Schedule notifications
     await NotificationService.scheduleAllReminders(relationshipData);
-    
+
     navigation.reset({
       index: 0,
       routes: [{ name: 'Dashboard' }],
@@ -47,7 +48,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
-          <Text 
+          <Text
             style={{
               fontSize: 16,
               fontFamily: 'InstrumentSans-Medium',
@@ -56,7 +57,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
           >
             {title}
           </Text>
-          <Text 
+          <Text
             style={{
               fontSize: 14,
               fontFamily: 'InstrumentSans-Regular',
@@ -67,7 +68,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
             {subtitle}
           </Text>
         </View>
-        <View 
+        <View
           className="w-6 h-6 rounded-full border-2 items-center justify-center"
           style={{
             backgroundColor: value ? colors.accent.rose : 'transparent',
@@ -86,7 +87,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
         {/* Header */}
         <View className="items-center mb-12">
           <Bell size={48} color={colors.accent.rose} />
-          <Text 
+          <Text
             className="text-center mt-4"
             style={{
               fontSize: 28,
@@ -96,7 +97,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
           >
             Never miss a milestone
           </Text>
-          <Text 
+          <Text
             className="text-center mt-2"
             style={{
               fontSize: 16,
@@ -116,7 +117,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
             value={monthlyReminder}
             onToggle={() => setMonthlyReminder(!monthlyReminder)}
           />
-          
+
           <ToggleOption
             title="Anniversary Reminders"
             subtitle="Remember your special day every year"
@@ -132,7 +133,7 @@ export default function ReminderPreferencesScreen({ navigation, route }) {
           onPress={handleFinish}
           activeOpacity={0.8}
         >
-          <Text 
+          <Text
             style={{
               color: 'white',
               fontSize: 16,

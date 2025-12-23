@@ -63,9 +63,9 @@ export default function DashboardScreen({ navigation, route }) {
       <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
         <View className="flex-1 justify-center items-center">
           <Heart size={60} color={colors.accent.rose} fill={colors.accent.rose} />
-          <Text 
-            style={{ 
-              fontSize: 18, 
+          <Text
+            style={{
+              fontSize: 18,
               fontFamily: 'InstrumentSans-Regular',
               color: colors.text.secondary,
               marginTop: 16
@@ -80,45 +80,45 @@ export default function DashboardScreen({ navigation, route }) {
 
   const StatCard = ({ title, value, subtitle, icon: Icon, color }) => {
     return (
-      <View 
+      <View
         className="rounded-3xl p-5 shadow-sm flex-1 mx-1"
-        style={{ 
+        style={{
           backgroundColor: colors.surface,
           borderWidth: 1,
           borderColor: colors.border
         }}
       >
         <View className="items-center">
-          <View 
+          <View
             className="rounded-full p-3 mb-3"
             style={{ backgroundColor: color }}
           >
             <Icon size={20} color="white" />
           </View>
-          <Text 
+          <Text
             className="mb-2"
-            style={{ 
-              fontSize: 24, 
+            style={{
+              fontSize: 24,
               fontFamily: 'InstrumentSans_SemiCondensed-Bold',
               color: colors.text.primary
             }}
           >
             {value}
           </Text>
-          <Text 
+          <Text
             className="text-center mb-1"
-            style={{ 
-              fontSize: 14, 
+            style={{
+              fontSize: 14,
               fontFamily: 'InstrumentSans-Medium',
               color: colors.text.primary
             }}
           >
             {title}
           </Text>
-          <Text 
+          <Text
             className="text-center"
-            style={{ 
-              fontSize: 11, 
+            style={{
+              fontSize: 11,
               fontFamily: 'InstrumentSans-Regular',
               color: colors.text.secondary
             }}
@@ -133,36 +133,34 @@ export default function DashboardScreen({ navigation, route }) {
   return (
     <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        {/* Header */}
         <View className="px-6 pt-6 pb-4">
           <View className="items-center">
-            <Text 
-              style={{ 
-                fontSize: 18, 
+            <Text
+              style={{
+                fontSize: 18,
                 fontFamily: 'InstrumentSans-Regular',
                 color: colors.text.secondary
               }}
             >
               Hello, Lovebirds!
             </Text>
-            <Text 
-              style={{ 
-                fontSize: 16, 
+            <Text
+              style={{
+                fontSize: 16,
                 fontFamily: 'InstrumentSans-Medium',
                 color: colors.text.muted
               }}
             >
-              {new Date().toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                month: 'long', 
-                day: 'numeric' 
+              {new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
               })}
             </Text>
           </View>
         </View>
 
-        {/* Hero Countdown Section */}
-        <HeroCountdown 
+        <HeroCountdown
           startDate={relationshipData.startDate}
           partnerNames={{
             partner1: relationshipData.partner1Name,
@@ -170,11 +168,10 @@ export default function DashboardScreen({ navigation, route }) {
           }}
         />
 
-        {/* Love Statistics Cards */}
         <View className="px-6 mb-8">
-          <Text 
-            style={{ 
-              fontSize: 18, 
+          <Text
+            style={{
+              fontSize: 18,
               fontFamily: 'InstrumentSans-SemiBold',
               color: colors.text.primary,
               marginBottom: 16
@@ -182,8 +179,7 @@ export default function DashboardScreen({ navigation, route }) {
           >
             Your Journey
           </Text>
-          
-          {/* First row - Time stats */}
+
           <View className="flex-row mb-4">
             <StatCard
               title="Total Hours"
@@ -201,7 +197,6 @@ export default function DashboardScreen({ navigation, route }) {
             />
           </View>
 
-          {/* Second row - Milestone stats */}
           <View className="flex-row mb-4">
             <StatCard
               title="Months Together"
@@ -211,34 +206,15 @@ export default function DashboardScreen({ navigation, route }) {
               color={colors.accent.rose}
             />
             <StatCard
-              title="Achievements"
-              value={Math.floor((duration.totalDays || 0) / 100)}
-              subtitle="Century marks"
-              icon={Trophy}
-              color={colors.accent.pink}
-            />
-          </View>
-
-          {/* Third row - Special metrics */}
-          <View className="flex-row mb-6">
-            <StatCard
               title="Weekends"
               value={Math.floor((duration.totalDays || 0) / 7 * 2)}
               subtitle="Weekend adventures"
               icon={Star}
               color={colors.accent.purple}
             />
-            <StatCard
-              title="Seasons"
-              value={Math.floor((duration.totalDays || 0) / 91)}
-              subtitle="Seasons of love"
-              icon={Sparkles}
-              color={colors.accent.cyan}
-            />
           </View>
 
-          {/* Minimal Summary Card */}
-          <View 
+          <View
             className="rounded-2xl p-5 border"
             style={{
               backgroundColor: colors.surface,
@@ -247,18 +223,18 @@ export default function DashboardScreen({ navigation, route }) {
           >
             <View className="flex-row items-center justify-between">
               <View className="flex-1">
-                <Text 
-                  style={{ 
-                    fontSize: 18, 
+                <Text
+                  style={{
+                    fontSize: 18,
                     fontFamily: 'InstrumentSans-SemiBold',
                     color: colors.text.primary
                   }}
                 >
                   Together for {DateUtils.formatDuration(duration)}
                 </Text>
-                <Text 
-                  style={{ 
-                    fontSize: 14, 
+                <Text
+                  style={{
+                    fontSize: 14,
                     fontFamily: 'InstrumentSans-Regular',
                     color: colors.text.secondary,
                     marginTop: 4
@@ -266,22 +242,22 @@ export default function DashboardScreen({ navigation, route }) {
                 >
                   Since {new Date(relationshipData.startDate).toLocaleDateString('en-US', {
                     month: 'long',
-                    day: 'numeric', 
+                    day: 'numeric',
                     year: 'numeric'
                   })}
                 </Text>
               </View>
-              
+
               <View className="items-end">
-                <View 
+                <View
                   className="rounded-full p-3"
                   style={{ backgroundColor: colors.accent.rose }}
                 >
                   <Heart size={20} color="white" fill="white" />
                 </View>
-                <Text 
-                  style={{ 
-                    fontSize: 12, 
+                <Text
+                  style={{
+                    fontSize: 12,
                     fontFamily: 'InstrumentSans-Medium',
                     color: colors.accent.rose,
                     marginTop: 8

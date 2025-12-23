@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { Users } from 'lucide-react-native';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function PartnerNamesScreen({ navigation }) {
   const [partner1Name, setPartner1Name] = useState('');
@@ -10,24 +11,24 @@ export default function PartnerNamesScreen({ navigation }) {
 
   const handleContinue = () => {
     if (partner1Name.trim() && partner2Name.trim()) {
-      navigation.navigate('StartDate', { 
-        partner1Name: partner1Name.trim(), 
-        partner2Name: partner2Name.trim() 
+      navigation.navigate('StartDate', {
+        partner1Name: partner1Name.trim(),
+        partner2Name: partner2Name.trim()
       });
     }
   };
 
   return (
     <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
-      <KeyboardAvoidingView 
-        className="flex-1" 
+      <KeyboardAvoidingView
+        className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <View className="flex-1 justify-center px-8">
           {/* Header */}
           <View className="items-center mb-12">
             <Users size={48} color={colors.accent.rose} />
-            <Text 
+            <Text
               className="text-center mt-4"
               style={{
                 fontSize: 28,
@@ -37,7 +38,7 @@ export default function PartnerNamesScreen({ navigation }) {
             >
               Who are the lovebirds?
             </Text>
-            <Text 
+            <Text
               className="text-center mt-2"
               style={{
                 fontSize: 16,
@@ -52,7 +53,7 @@ export default function PartnerNamesScreen({ navigation }) {
           {/* Input Fields */}
           <View className="mb-12">
             <View className="mb-6">
-              <Text 
+              <Text
                 style={{
                   fontFamily: 'InstrumentSans-Medium',
                   color: colors.text.primary,
@@ -80,7 +81,7 @@ export default function PartnerNamesScreen({ navigation }) {
             </View>
 
             <View>
-              <Text 
+              <Text
                 style={{
                   fontFamily: 'InstrumentSans-Medium',
                   color: colors.text.primary,
@@ -112,15 +113,15 @@ export default function PartnerNamesScreen({ navigation }) {
           <TouchableOpacity
             className="py-4 rounded-2xl shadow-sm"
             style={{
-              backgroundColor: partner1Name.trim() && partner2Name.trim() 
-                ? colors.accent.rose 
+              backgroundColor: partner1Name.trim() && partner2Name.trim()
+                ? colors.accent.rose
                 : colors.text.muted
             }}
             onPress={handleContinue}
             disabled={!partner1Name.trim() || !partner2Name.trim()}
             activeOpacity={0.8}
           >
-            <Text 
+            <Text
               style={{
                 fontSize: 16,
                 fontFamily: 'InstrumentSans-Medium',

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { Calendar } from 'lucide-react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function StartDateScreen({ navigation, route }) {
   const { partner1Name, partner2Name } = route.params;
@@ -40,7 +41,7 @@ export default function StartDateScreen({ navigation, route }) {
         {/* Header */}
         <View className="items-center mb-12">
           <Calendar size={48} color={colors.accent.rose} />
-          <Text 
+          <Text
             className="text-center mt-4"
             style={{
               fontSize: 28,
@@ -50,7 +51,7 @@ export default function StartDateScreen({ navigation, route }) {
           >
             When did it all begin?
           </Text>
-          <Text 
+          <Text
             className="text-center mt-2"
             style={{
               fontSize: 16,
@@ -63,14 +64,14 @@ export default function StartDateScreen({ navigation, route }) {
         </View>
 
         {/* Date Display */}
-        <View 
+        <View
           className="rounded-2xl p-6 mb-8 border"
           style={{
             backgroundColor: colors.surface,
             borderColor: colors.border
           }}
         >
-          <Text 
+          <Text
             style={{
               fontFamily: 'InstrumentSans-Regular',
               color: colors.text.secondary,
@@ -80,7 +81,7 @@ export default function StartDateScreen({ navigation, route }) {
           >
             Your relationship started on:
           </Text>
-          <Text 
+          <Text
             style={{
               fontSize: 18,
               fontFamily: 'InstrumentSans-Medium',
@@ -101,7 +102,7 @@ export default function StartDateScreen({ navigation, route }) {
           onPress={() => setShowDatePicker(true)}
           activeOpacity={0.8}
         >
-          <Text 
+          <Text
             style={{
               color: colors.accent.rose,
               fontSize: 16,
@@ -120,7 +121,7 @@ export default function StartDateScreen({ navigation, route }) {
           onPress={handleContinue}
           activeOpacity={0.8}
         >
-          <Text 
+          <Text
             style={{
               color: 'white',
               fontSize: 16,
