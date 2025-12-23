@@ -11,6 +11,7 @@ import StartDateScreen from '../screens/onboarding/start-date-screen';
 import ReminderPreferencesScreen from '../screens/onboarding/reminder-preference-screen';
 import DashboardScreen from '../screens/main/dashboard-screen';
 import SettingsScreen from '../screens/main/settings-screen';
+import CalendarScreen from '../screens/main/calendar-screen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,7 +65,7 @@ function MainTabs() {
             />
             <Tab.Screen
                 name="Calendar"
-                component={DashboardScreen}
+                component={CalendarScreen}
                 options={{ tabBarLabel: 'Memories' }}
             />
             <Tab.Screen
