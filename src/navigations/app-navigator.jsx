@@ -77,10 +77,34 @@ function MainTabs() {
 }
 
 export default function AppNavigator() {
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [hasCompletedOnboarding, setHasCompletedOnboarding] = React.useState(false);
+
+    React.useEffect(() => {
+        checkOnboardingStatus();
+    }, []);
+
+    const checkOnboardingStatus = async () => {
+        try {
+            const { StorageService } = await import('../utils/storage');
+            const hasCompleted = await StorageService.hasCompletedOnboarding();
+            setHasCompletedOnboarding(hasCompleted);
+        } catch (error) {
+            console.error('Error checking onboarding status:', error);
+            setHasCompletedOnboarding(false);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    if (isLoading) {
+        return null; // or a loading screen component
+    }
+
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Welcome"
+                initialRouteName={hasCompletedOnboarding ? "Dashboard" : "Welcome"}
                 screenOptions={{
                     headerShown: false,
                     animation: 'slide_from_right',

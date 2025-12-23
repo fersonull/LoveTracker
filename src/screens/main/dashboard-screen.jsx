@@ -35,6 +35,11 @@ export default function DashboardScreen({ navigation, route }) {
       }
     } catch (error) {
       console.error('Error loading relationship data:', error);
+      // On error, also redirect to onboarding
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Welcome' }],
+      });
     }
   };
 

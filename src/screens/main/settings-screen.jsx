@@ -19,9 +19,19 @@ export default function SettingsScreen({ navigation }) {
       const data = await StorageService.loadRelationshipData();
       if (data) {
         setRelationshipData(data);
+      } else {
+        // No data found, redirect to onboarding
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Welcome' }],
+        });
       }
     } catch (error) {
       console.error('Error loading relationship data:', error);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Welcome' }],
+      });
     }
   };
 
