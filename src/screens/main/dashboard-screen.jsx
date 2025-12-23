@@ -186,7 +186,7 @@ export default function DashboardScreen({ navigation, route }) {
             Your Journey
           </Text>
 
-          <View className="flex-row mb-4">
+          <View className="flex-row gap-4 mb-4">
             <StatCard
               title="Total Hours"
               value={Math.floor((duration.totalDays || 0) * 24).toLocaleString()}
@@ -203,7 +203,7 @@ export default function DashboardScreen({ navigation, route }) {
             />
           </View>
 
-          <View className="flex-row mb-4">
+          <View className="flex-row gap-4 mb-4">
             <StatCard
               title="Months Together"
               value={duration.totalMonths || '0'}
