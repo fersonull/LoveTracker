@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, Modal } from 'react-native';
 import { X, Check, Users, Calendar } from 'lucide-react-native';
 import { useTheme } from '../context/ThemeContext';
-import { StorageService } from '../utils/storage';
 import { NotificationService } from '../services/notificationService';
+import { useRelationship } from '../context/RelationshipContext';
 import OnboardingContainer from '../components/onboarding/onboarding-container';
 import FormInput from '../components/onboarding/form-input';
 import ThemeButton from '../components/common/theme-button';
@@ -12,9 +12,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export default function EditDetailsModal({ 
   visible, 
   onClose, 
-  editType, // 'names' or 'date'
-  currentData,
-  onDataUpdated 
+  editType // 'names' or 'date'
 }) {
   const [partner1Name, setPartner1Name] = useState('');
   const [partner2Name, setPartner2Name] = useState('');
@@ -22,14 +20,15 @@ export default function EditDetailsModal({
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { colors } = useTheme();
+  const { relationshipData, updateRelationshipData } = useRelationship();
 
   useEffect(() => {
-    if (currentData && visible) {
-      setPartner1Name(currentData.partner1Name || '');
-      setPartner2Name(currentData.partner2Name || '');
-      setSelectedDate(currentData.startDate ? new Date(currentData.startDate) : new Date());
+    if (relationshipData && visible) {
+      setPartner1Name(relationshipData.partner1Name || '');
+      setPartner2Name(relationshipData.partner2Name || '');
+      setSelectedDate(relationshipData.startDate ? new Date(relationshipData.startDate) : new Date());
     }
-  }, [currentData, visible]);
+  }, [relationshipData, visible]);
 
   const handleSave = async () => {
     setIsLoading(true);
@@ -53,17 +52,14 @@ export default function EditDetailsModal({
         };
       }
 
-      // Update storage
-      const updatedData = { ...currentData, ...updates };
-      await StorageService.saveRelationshipData(updatedData);
+      // Update context and storage
+      const updatedData = await updateRelationshipData(updates);
       
       // Update notifications if date changed
       if (editType === 'date') {
         await NotificationService.scheduleAllReminders(updatedData);
       }
       
-      // Notify parent component
-      onDataUpdated(updatedData);
       onClose();
     } catch (error) {
       console.error('Error updating data:', error);

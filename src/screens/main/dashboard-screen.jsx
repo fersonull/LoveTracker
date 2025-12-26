@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Heart, Settings, Calendar, Clock, Timer, Star, Trophy, Sparkles } from 'lucide-react-native';
-import { StorageService } from '../../utils/storage';
 import { DateUtils } from '../../utils/date-calculation';
 import HeroCountdown from '../../components/dashboard/hero-countdown';
 import { useTheme } from '../../context/ThemeContext';
+import { useRelationship } from '../../context/RelationshipContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function DashboardScreen({ navigation, route }) {
-  const [relationshipData, setRelationshipData] = useState(null);
   const [duration, setDuration] = useState({
     days: 0,
     months: 0,
@@ -16,32 +15,17 @@ export default function DashboardScreen({ navigation, route }) {
     totalMonths: 0
   });
   const { colors } = useTheme();
+  const { relationshipData, isLoading } = useRelationship();
 
   useEffect(() => {
-    loadRelationshipData();
-  }, []);
-
-  const loadRelationshipData = async () => {
-    try {
-      const data = await StorageService.loadRelationshipData();
-      if (data) {
-        setRelationshipData(data);
-      } else {
-        // No data found, redirect to onboarding
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Welcome' }],
-        });
-      }
-    } catch (error) {
-      console.error('Error loading relationship data:', error);
-      // On error, also redirect to onboarding
+    if (!relationshipData && !isLoading) {
+      // No data found, redirect to onboarding
       navigation.reset({
         index: 0,
         routes: [{ name: 'Welcome' }],
       });
     }
-  };
+  }, [relationshipData, isLoading, navigation]);
 
   useEffect(() => {
     if (relationshipData) {
@@ -64,7 +48,7 @@ export default function DashboardScreen({ navigation, route }) {
     return DateUtils.formatShortDate(date);
   };
 
-  if (!relationshipData) {
+  if (isLoading || !relationshipData) {
     return (
       <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
         <View className="flex-1 justify-center items-center">
