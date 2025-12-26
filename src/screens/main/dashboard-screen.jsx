@@ -11,10 +11,11 @@ import StatCard from "../../components/dashboard/stat-card"
 
 export default function DashboardScreen({ navigation, route }) {
   const [duration, setDuration] = useState({
-    days: 0,
-    months: 0,
+    totalDays: 0,
+    totalMonths: 0,
     years: 0,
-    totalMonths: 0
+    months: 0,
+    days: 0
   });
   const { colors } = useTheme();
   const { relationshipData, isLoading } = useRelationship();
