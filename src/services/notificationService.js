@@ -46,8 +46,8 @@ export class NotificationService {
       await notifee.createTriggerNotification(
         {
           id: 'monthly-reminder',
-          title: `Happy ${monthCount}${this.getOrdinalSuffix(monthCount)} Monthsary! 💕`,
-          body: `${relationshipData.partner1Name} & ${relationshipData.partner2Name} - Another month of love together ❤️`,
+          title: `Happy ${monthCount}${this.getOrdinalSuffix(monthCount)} Monthsary!`,
+          body: `${relationshipData.partner1Name} & ${relationshipData.partner2Name} - Another month of love together`,
           android: {
             channelId: 'love-reminders',
             smallIcon: 'ic_launcher',
@@ -87,7 +87,7 @@ export class NotificationService {
       await notifee.createTriggerNotification(
         {
           id: 'anniversary-reminder',
-          title: `Happy ${yearCount}${this.getOrdinalSuffix(yearCount)} Anniversary! 🎉`,
+          title: `Happy ${yearCount}${this.getOrdinalSuffix(yearCount)} Anniversary!`,
           body: `${relationshipData.partner1Name} & ${relationshipData.partner2Name} - ${yearCount} ${yearCount === 1 ? 'year' : 'years'} of beautiful love! 💖`,
           android: {
             channelId: 'love-reminders',
