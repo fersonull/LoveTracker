@@ -6,6 +6,8 @@ import HeroCountdown from '../../components/dashboard/hero-countdown';
 import { useTheme } from '../../context/ThemeContext';
 import { useRelationship } from '../../context/RelationshipContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import SummaryCard from "../../components/dashboard/summary-card"
+import StatCard from "../../components/dashboard/stat-card"
 
 export default function DashboardScreen({ navigation, route }) {
   const [duration, setDuration] = useState({
@@ -68,57 +70,6 @@ export default function DashboardScreen({ navigation, route }) {
     );
   }
 
-  const StatCard = ({ title, value, subtitle, icon: Icon, color }) => {
-    return (
-      <View
-        className="rounded-3xl p-5 shadow-sm flex-1 mx-1"
-        style={{
-          backgroundColor: colors.surface,
-          borderWidth: 1,
-          borderColor: colors.border
-        }}
-      >
-        <View className="items-center">
-          <View
-            className="rounded-full p-3 mb-3"
-            style={{ backgroundColor: color }}
-          >
-            <Icon size={20} color="white" />
-          </View>
-          <Text
-            className="mb-2"
-            style={{
-              fontSize: 24,
-              fontFamily: 'InstrumentSans_SemiCondensed-Bold',
-              color: colors.text.primary
-            }}
-          >
-            {value}
-          </Text>
-          <Text
-            className="text-center mb-1"
-            style={{
-              fontSize: 14,
-              fontFamily: 'InstrumentSans-Medium',
-              color: colors.text.primary
-            }}
-          >
-            {title}
-          </Text>
-          <Text
-            className="text-center"
-            style={{
-              fontSize: 11,
-              fontFamily: 'InstrumentSans-Regular',
-              color: colors.text.secondary
-            }}
-          >
-            {subtitle}
-          </Text>
-        </View>
-      </View>
-    );
-  };
 
   return (
     <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
@@ -204,60 +155,7 @@ export default function DashboardScreen({ navigation, route }) {
             />
           </View>
 
-          <View
-            className="rounded-2xl p-5 border"
-            style={{
-              backgroundColor: colors.surface,
-              borderColor: colors.border
-            }}
-          >
-            <View className="flex-row items-center justify-between">
-              <View className="flex-1">
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontFamily: 'InstrumentSans-SemiBold',
-                    color: colors.text.primary
-                  }}
-                >
-                  Together for {DateUtils.formatDuration(duration)}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontFamily: 'InstrumentSans-Regular',
-                    color: colors.text.secondary,
-                    marginTop: 4
-                  }}
-                >
-                  Since {new Date(relationshipData.startDate).toLocaleDateString('en-US', {
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric'
-                  })}
-                </Text>
-              </View>
-
-              <View className="items-end">
-                <View
-                  className="rounded-full p-3"
-                  style={{ backgroundColor: colors.accent.rose }}
-                >
-                  <Heart size={20} color="white" fill="white" />
-                </View>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    fontFamily: 'InstrumentSans-Medium',
-                    color: colors.accent.rose,
-                    marginTop: 8
-                  }}
-                >
-                  {duration.totalDays} days
-                </Text>
-              </View>
-            </View>
-          </View>
+          <SummaryCard relationshipData={relationshipData} duration={duration} />
         </View>
       </ScrollView>
     </SafeAreaView>
