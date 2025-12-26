@@ -2,30 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Calendar, Heart, ArrowLeft, ArrowRight } from 'lucide-react-native';
 import { useTheme } from '../../context/ThemeContext';
-import { StorageService } from '../../utils/storage';
+import { useRelationship } from '../../context/RelationshipContext';
 import { DateUtils } from '../../utils/date-calculation';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function CalendarScreen({ navigation }) {
-  const [relationshipData, setRelationshipData] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const { colors } = useTheme();
+  const { relationshipData, isLoading } = useRelationship();
 
   useEffect(() => {
-    loadRelationshipData();
-  }, []);
-
-  const loadRelationshipData = async () => {
-    try {
-      const data = await StorageService.loadRelationshipData();
-      if (data) {
-        setRelationshipData(data);
-      }
-    } catch (error) {
-      console.error('Error loading relationship data:', error);
+    if (!relationshipData && !isLoading) {
+      // No data found, redirect to onboarding
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Welcome' }],
+      });
     }
-  };
+  }, [relationshipData, isLoading, navigation]);
 
   const getDaysInMonth = (date) => {
     const year = date.getFullYear();
@@ -161,7 +156,7 @@ export default function CalendarScreen({ navigation }) {
     );
   };
 
-  if (!relationshipData) {
+  if (isLoading || !relationshipData) {
     return (
       <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
         <View className="flex-1 justify-center items-center">

@@ -9,9 +9,9 @@ import FormInput from '../components/onboarding/form-input';
 import ThemeButton from '../components/common/theme-button';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function EditDetailsModal({ 
-  visible, 
-  onClose, 
+export default function EditDetailsModal({
+  visible,
+  onClose,
   editType // 'names' or 'date'
 }) {
   const [partner1Name, setPartner1Name] = useState('');
@@ -32,10 +32,10 @@ export default function EditDetailsModal({
 
   const handleSave = async () => {
     setIsLoading(true);
-    
+
     try {
       let updates = {};
-      
+
       if (editType === 'names') {
         if (!partner1Name.trim() || !partner2Name.trim()) {
           alert('Please fill in both names');
@@ -54,12 +54,12 @@ export default function EditDetailsModal({
 
       // Update context and storage
       const updatedData = await updateRelationshipData(updates);
-      
+
       // Update notifications if date changed
       if (editType === 'date') {
         await NotificationService.scheduleAllReminders(updatedData);
       }
-      
+
       onClose();
     } catch (error) {
       console.error('Error updating data:', error);
@@ -89,7 +89,7 @@ export default function EditDetailsModal({
     <View>
       <View className="items-center mb-8">
         <Users size={48} color={colors.accent.rose} />
-        <Text 
+        <Text
           style={{
             fontSize: 24,
             fontFamily: 'InstrumentSans_SemiCondensed-Regular',
@@ -99,7 +99,7 @@ export default function EditDetailsModal({
         >
           Edit Names
         </Text>
-        <Text 
+        <Text
           style={{
             fontSize: 14,
             fontFamily: 'InstrumentSans-Regular',
@@ -131,7 +131,7 @@ export default function EditDetailsModal({
     <View>
       <View className="items-center mb-8">
         <Calendar size={48} color={colors.accent.rose} />
-        <Text 
+        <Text
           style={{
             fontSize: 24,
             fontFamily: 'InstrumentSans_SemiCondensed-Regular',
@@ -141,7 +141,7 @@ export default function EditDetailsModal({
         >
           Edit Start Date
         </Text>
-        <Text 
+        <Text
           style={{
             fontSize: 14,
             fontFamily: 'InstrumentSans-Regular',
@@ -154,14 +154,14 @@ export default function EditDetailsModal({
       </View>
 
       {/* Date Display */}
-      <View 
+      <View
         className="rounded-2xl p-6 mb-6 border"
         style={{
           backgroundColor: colors.surface,
           borderColor: colors.border
         }}
       >
-        <Text 
+        <Text
           style={{
             fontFamily: 'InstrumentSans-Regular',
             color: colors.text.secondary,
@@ -171,7 +171,7 @@ export default function EditDetailsModal({
         >
           Your relationship started on:
         </Text>
-        <Text 
+        <Text
           style={{
             fontSize: 18,
             fontFamily: 'InstrumentSans-Medium',
@@ -210,8 +210,8 @@ export default function EditDetailsModal({
             >
               <X size={24} color={colors.text.primary} />
             </TouchableOpacity>
-            
-            <Text 
+
+            <Text
               style={{
                 fontSize: 18,
                 fontFamily: 'InstrumentSans-SemiBold',
@@ -220,7 +220,7 @@ export default function EditDetailsModal({
             >
               {editType === 'names' ? 'Edit Names' : 'Edit Start Date'}
             </Text>
-            
+
             <TouchableOpacity
               onPress={handleSave}
               activeOpacity={0.8}
@@ -235,7 +235,7 @@ export default function EditDetailsModal({
         {/* Content */}
         <OnboardingContainer showKeyboardAvoidingView={editType === 'names'}>
           {editType === 'names' ? renderNamesEditor() : renderDateEditor()}
-          
+
           {/* Save Button */}
           <ThemeButton
             title={isLoading ? "Saving..." : "Save Changes"}
