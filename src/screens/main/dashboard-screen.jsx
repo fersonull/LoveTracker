@@ -111,31 +111,48 @@ export default function DashboardScreen({ navigation, route }) {
         />
 
         <View className="px-6 mb-8">
-          <Text
-            style={{
-              fontSize: 18,
-              fontFamily: 'InstrumentSans-SemiBold',
-              color: colors.text.primary,
-              marginBottom: 16
-            }}
-          >
-            Your Journey
-          </Text>
+          {/* Section Header */}
+          <View className="items-center mb-8">
+            <View className="flex-row items-center mb-3">
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontFamily: 'InstrumentSans_SemiCondensed-Medium',
+                  color: colors.text.primary,
+                  marginLeft: 8,
+                  marginRight: 8
+                }}
+              >
+                Love Milestones
+              </Text>
+            </View>
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: 'InstrumentSans-Regular',
+                color: colors.text.secondary,
+                textAlign: 'center',
+                fontStyle: 'italic'
+              }}
+            >
+              Every moment of your beautiful journey
+            </Text>
+          </View>
 
           <View className="flex-row gap-2 mb-4">
             <StatCard
-              title="Total Hours"
+              title="Hours in Love"
               value={Math.floor((duration.totalDays || 0) * 24).toLocaleString()}
-              subtitle="Hours of memories"
+              subtitle="Time well spent together"
               icon={Clock}
-              color={colors.accent.rose}
+              color="#FF6B9D"
             />
             <StatCard
-              title="Total Minutes"
+              title="Precious Minutes"
               value={Math.floor((duration.totalDays || 0) * 24 * 60).toLocaleString()}
-              subtitle="Precious moments"
+              subtitle="Every minute counts"
               icon={Timer}
-              color={colors.accent.pink}
+              color="#C77DFF"
             />
           </View>
 
