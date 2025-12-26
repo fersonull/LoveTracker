@@ -5,9 +5,12 @@ import { StorageService } from '../../utils/storage';
 import { NotificationService } from '../../services/notificationService';
 import { useTheme } from '../../context/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import EditDetailsModal from '../edit-details-modal';
 
 export default function SettingsScreen({ navigation }) {
   const [relationshipData, setRelationshipData] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editType, setEditType] = useState(null);
   const { isDarkMode, colors, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -215,14 +218,20 @@ export default function SettingsScreen({ navigation }) {
             <SettingItem
               title="Edit Names"
               subtitle={`${relationshipData.partner1Name} & ${relationshipData.partner2Name}`}
-              onPress={() => {/* TODO: Navigate to edit names */ }}
+              onPress={() => {
+                setEditType('names');
+                setShowEditModal(true);
+              }}
               rightElement={<Edit3 size={20} color={colors.text.muted} />}
             />
 
             <SettingItem
               title="Edit Start Date"
               subtitle={new Date(relationshipData.startDate).toLocaleDateString()}
-              onPress={() => {/* TODO: Navigate to edit date */ }}
+              onPress={() => {
+                setEditType('date');
+                setShowEditModal(true);
+              }}
               rightElement={<Edit3 size={20} color={colors.text.muted} />}
             />
           </View>
@@ -278,6 +287,20 @@ export default function SettingsScreen({ navigation }) {
           </View>
         </View>
       </ScrollView>
+
+      {/* Edit Details Modal */}
+      <EditDetailsModal
+        visible={showEditModal}
+        onClose={() => {
+          setShowEditModal(false);
+          setEditType(null);
+        }}
+        editType={editType}
+        currentData={relationshipData}
+        onDataUpdated={(updatedData) => {
+          setRelationshipData(updatedData);
+        }}
+      />
     </SafeAreaView>
   );
 }
