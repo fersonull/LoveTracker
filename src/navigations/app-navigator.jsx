@@ -37,7 +37,8 @@ function MainTabs() {
                     return <IconComponent
                         size={size}
                         color={color}
-                        fill={focused ? color : 'none'}
+                        strokeWidth={focused ? 2.5 : 2}
+                        fill="none"
                     />;
                 },
                 tabBarActiveTintColor: colors.accent.rose,
