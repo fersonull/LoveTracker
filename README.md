@@ -1,97 +1,161 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Love Tracker
 
-# Getting Started
+A minimalist relationship tracking mobile application built with React Native for couples to celebrate their journey together.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Overview
 
-## Step 1: Start Metro
+Love Tracker is a personal mobile application designed to help couples track their relationship duration and celebrate important milestones. The app focuses on intimacy, privacy, and meaningful moments without social features or distractions.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Core Functionality
 
-```sh
-# Using npm
+**Relationship Duration Tracking**
+- Real-time countdown displaying days, hours, minutes, and seconds together
+- Accurate calculation of relationship milestones
+- Multiple time format displays (days, months, years)
+
+**Milestone Reminders**
+- Monthly anniversary notifications (monthsaries)
+- Yearly anniversary reminders
+- Local notifications using @notifee/react-native
+- Customizable reminder preferences
+
+**Data Management**
+- Local data storage using AsyncStorage
+- Offline-first functionality
+- Data persistence across app sessions
+- Edit relationship details (names, start date)
+
+### User Interface
+
+**Design Philosophy**
+- Clean, minimal interface with generous spacing
+- Romantic color palette (soft pinks, roses, warm neutrals)
+- Modern typography using Instrument Sans font family
+- Theme support (light and dark modes)
+
+**Navigation Structure**
+- Bottom tab navigation (Home, Memories, Settings)
+- Modal-based editing interfaces
+- Smooth animations and transitions
+- Responsive layout design
+
+**Screens**
+- Dashboard: Main countdown display and relationship statistics
+- Calendar: Timeline view of relationship milestones
+- Settings: App preferences and data management
+
+### Technical Features
+
+**Architecture**
+- React Native CLI-based project
+- Context-based state management
+- Component-driven architecture
+- TypeScript support
+
+**Libraries and Tools**
+- React Navigation for routing
+- NativeWind (Tailwind CSS) for styling
+- Lucide React Native for iconography
+- React Native DateTimePicker for date selection
+- AsyncStorage for local data persistence
+
+**Development Features**
+- Hot reload support
+- ESLint and Prettier configuration
+- Jest testing framework setup
+- Metro bundler optimization
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- React Native development environment
+- Android Studio (for Android development)
+- Xcode (for iOS development)
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Install iOS dependencies (iOS only):
+   ```bash
+   cd ios && pod install
+   ```
+
+### Running the Application
+
+**Start Metro Bundler:**
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+**Launch on Android:**
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+**Launch on iOS:**
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Project Structure
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```
+src/
+├── components/          # Reusable UI components
+│   ├── common/         # Generic components
+│   ├── calendar/       # Calendar-specific components
+│   ├── dashboard/      # Dashboard components
+│   ├── onboarding/     # Onboarding flow components
+│   └── settings/       # Settings components
+├── context/            # React context providers
+├── hooks/              # Custom React hooks
+├── navigations/        # Navigation configuration
+├── screens/            # Screen components
+├── services/           # External service integrations
+├── utils/              # Utility functions
+└── styles/             # Styling utilities
+```
 
-## Step 3: Modify your app
+## Key Components
 
-Now that you have successfully run the app, let's make changes!
+**State Management**
+- ThemeContext: Manages light/dark mode preferences
+- RelationshipContext: Handles relationship data and updates
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+**Core Screens**
+- DashboardScreen: Main app interface with countdown and statistics
+- CalendarScreen: Relationship timeline and milestone calendar
+- SettingsScreen: App preferences and data management
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+**Utility Services**
+- StorageService: Local data persistence operations
+- NotificationService: Milestone reminder scheduling
+- DateUtils: Date calculation and formatting functions
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Configuration
 
-## Congratulations! :tada:
+The app supports customization through:
+- Theme preferences (light/dark mode)
+- Notification settings (monthly/yearly reminders)
+- Relationship data (names, start date)
+- Font and styling customization
 
-You've successfully run and modified your React Native App. :partying_face:
+## Privacy and Data
 
-### Now what?
+- All data stored locally on device
+- No external servers or cloud storage
+- No user tracking or analytics
+- Privacy-focused design
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## License
 
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project is a personal application developed for educational and personal use.
